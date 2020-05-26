@@ -1,0 +1,4 @@
+{
+    "mongoURI": "mongodb+srv://Dylan:Mustardseed10@pinterlist-bynox.mongodb.net/test?retryWrites=true&w=majority",
+    "jwtSecret": "super_secret_secret"
+}
