@@ -9,52 +9,24 @@ const User = require("../../models/User");
 // @desc add an item to a grocery list
 // @access Private
 router.post("/:userid/:listid", auth, (req, res) => {
-  console.log("== hello hello");
-
   //find a user with the given userid and with a list collection containing listid
-  User.updateOne({
-    //USE THIS FIND CODE FOR GET
-    _id: req.params.userid,
-    "listCollection._id": req.params.listid,
-  })
+  User.updateOne(
+    {
+      _id: req.params.userid,
+      "listCollection._id": req.params.listid,
+    },
+    {
+      //push the new ingredient to the list
+      $push: {
+        "listCollection.$.groceryList.itemCollection": {
+          ingredientName: req.body.ingredientName,
+          quantity: req.body.quantity,
+        },
+      },
+    }
+  )
     .then((user) => {
-      for (i in user.listCollection) {
-        console.log("== loop");
-        console.log(i);
-        console.log(user.listCollection[i]._id);
-        if (user.listCollection[i]._id == req.params.listid) {
-          console.log("== found a match");
-          user.listCollection[i].groceryList.itemCollection.unshift({
-            ingredientName: req.body.ingredientName,
-            quantity: req.body.quantity,
-          });
-          break;
-        }
-      }
-      return res
-        .status(202)
-        .json(
-          user.listCollection.find((list) => list._id == req.params.listid)
-        );
-      // console.log("== user: ");
-      // console.log(user[0].find((list) => list._id == req.params.listid));
-      // user
-      //   .updateOne()
-      //   .then((result) => {
-      //     // console.log(req.body.itemName);
-      //     // console.log(user);
-      //     return res
-      //       .status(202)
-      //       .json(
-      //         user.listCollection.find((list) => list._id == req.params.listid)
-      //       );
-      //   })
-      //   .catch((err) => console.log(err));
-
-      //return the newly created list
-      // var newList = user[0].listCollection.find(
-      //   (list) => list._id == req.params.listid
-      // );
+      return res.status(202).json(user);
     })
     .catch((err) => {
       console.log(err);
@@ -98,6 +70,7 @@ router.post("/:userid", auth, (req, res) => {
   User.findById(req.params.userid, "listCollection")
     .then((user) => {
       console.log("== made it to user");
+      console.log("== req.bod.listName", req.body.listName);
       if (!user) {
         return res.status(404).end();
       }
@@ -155,13 +128,32 @@ router.post("/", auth, (req, res) => {
   newItem.save().then((item) => res.json(item));
 });
 
-// // @route DELETE api/items/:id
-// // @desc Delete selected item
-// // @access Private
-// router.delete("/:id", auth, (req, res) => {
-//   Item.findById(req.params.id)
-//     .then((item) => item.remove().then(() => res.json({ success: true })))
-//     .catch((err) => res.status(404).json({ success: false }));
-// });
+// @route DELETE api/lists/:userid/:id
+// @desc Delete selected list
+// @access Private
+router.delete("/:userid/:listid", auth, (req, res) => {
+  console.log("== in delete action");
+  User.updateOne(
+    {
+      _id: req.params.userid,
+      "listCollection._id": req.params.listid,
+    },
+    {
+      //delete the ingredient from the list by searching through the listCollection with the listed id.
+      $pull: {
+        listCollection: { _id: req.params.listid },
+      },
+    }
+  )
+    .then((user) => {
+      res.status(202).json(req.params.listid);
+    })
+    .catch((err) => {
+      console.log(err);
+      res
+        .status(404)
+        .json({ success: false, fail_on: "This list does not exist." });
+    });
+});
 
 module.exports = router;

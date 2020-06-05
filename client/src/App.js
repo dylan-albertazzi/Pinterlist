@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import AppNavbar from "./components/AppNavbar";
 import GroceryList from "./components/GroceryList";
 import ItemModal from "./components/ItemModal";
+import ListModal from "./components/ListModal";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Container } from "reactstrap";
 
@@ -22,6 +23,7 @@ class App extends Component {
           <AppNavbar />
           <Container>
             <ItemModal />
+            <ListModal />
             <GroceryList />
           </Container>
         </div>

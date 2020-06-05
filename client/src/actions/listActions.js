@@ -1,10 +1,10 @@
 import axios from "axios";
-import { GET_ITEMS, ADD_ITEM, DELETE_ITEM, ITEMS_LOADING } from "./types";
+import { ITEMS_LOADING, ADD_LIST, DELETE_LIST, GET_LISTS } from "./types";
 import { tokenConfig } from "./authActions";
 import { returnErrors } from "./errorActions";
 
-//get Lists -> turn in to get items
-export const getItems = (userid) => (dispatch, getState) => {
+//get Lists
+export const getLists = (userid) => (dispatch, getState) => {
   //dispatch allows us to send async requests
   console.log("== In action");
   console.log("== userid", userid);
@@ -14,7 +14,7 @@ export const getItems = (userid) => (dispatch, getState) => {
     .then((res) => {
       console.log("== res.data: ", res.data);
       dispatch({
-        type: GET_ITEMS,
+        type: GET_LISTS,
         payload: res.data,
       });
     })
@@ -23,13 +23,13 @@ export const getItems = (userid) => (dispatch, getState) => {
     );
 };
 
-export const addItem = (item) => (dispatch, getState) => {
+export const addList = (userid, list) => (dispatch, getState) => {
   axios
-    .post("/api/items", item, tokenConfig(getState))
+    .post(`/api/lists/${userid}`, list, tokenConfig(getState))
     .then((res) =>
       dispatch({
-        type: ADD_ITEM,
-        payload: res.data,
+        type: ADD_LIST,
+        payload: list,
       })
     )
     .catch((err) =>
@@ -37,20 +37,18 @@ export const addItem = (item) => (dispatch, getState) => {
     );
 };
 
-export const deleteItem = (listid, userid) => (dispatch, getState) => {
-  console.log("==in delete item func");
+export const deleteList = (listid, userid) => (dispatch, getState) => {
   axios
     .delete(`/api/lists/${userid}/${listid}`, tokenConfig(getState))
     .then((res) =>
       dispatch({
-        type: DELETE_ITEM,
+        type: DELETE_LIST,
         payload: res.data,
       })
     )
     .catch((err) =>
       dispatch(returnErrors(err.response.data, err.response.status))
     );
-  console.log("== after delete item func");
 };
 
 export const setItemsLoading = () => {

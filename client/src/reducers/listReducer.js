@@ -1,40 +1,32 @@
 //where actual state goes
 
 import {
-  GET_ITEMS,
-  ADD_ITEM,
-  DELETE_ITEM,
   ITEMS_LOADING,
   ADD_LIST,
+  DELETE_LIST,
+  GET_LISTS,
 } from "../actions/types";
 
 const initialState = {
-  items: [],
+  lists: [],
   loading: false,
 };
 
 //The spread operator (...) takes the current state. Then you reassign the variables to be updated. This allows us to update an immutable type
 export default function (state = initialState, action) {
   switch (action.type) {
-    case GET_ITEMS:
+    case GET_LISTS:
       console.log("== in reducer");
       console.log("== payload:", action.payload);
       return {
         ...state,
-        items: action.payload,
+        lists: action.payload,
         loading: false, //turn off loading once you have the payload
       };
-    case DELETE_ITEM:
-      console.log("== in delete reducer");
-      console.log("delte action payload", action.payload);
+    case ADD_LIST:
       return {
         ...state,
-        items: state.items.filter((item) => item._id !== action.payload),
-      };
-    case ADD_ITEM:
-      return {
-        ...state,
-        items: [action.payload, ...state.items],
+        lists: [action.payload, ...state.lists],
       };
 
     case ITEMS_LOADING:
