@@ -29,7 +29,7 @@ export const addList = (userid, list) => (dispatch, getState) => {
     .then((res) =>
       dispatch({
         type: ADD_LIST,
-        payload: list,
+        payload: res.data,
       })
     )
     .catch((err) =>

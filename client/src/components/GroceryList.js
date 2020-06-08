@@ -3,7 +3,7 @@ import { Container, ListGroup, ListGroupItem, Button } from "reactstrap";
 import { CSSTransition, TransitionGroup } from "react-transition-group";
 import { connect } from "react-redux";
 import { getItems, deleteItem } from "../actions/itemActions";
-import { getLists } from "../actions/listActions";
+import { getLists, deleteList } from "../actions/listActions";
 import PropTypes from "prop-types";
 
 class GroceryList extends Component {
@@ -24,7 +24,7 @@ class GroceryList extends Component {
   onDeleteClick = (id) => {
     console.log("== in onDeleteClick:", id);
     console.log("==userid: ", this.props.userId);
-    this.props.deleteItem(id, this.props.userId);
+    this.props.deleteList(id, this.props.userId);
   };
 
   render() {
@@ -78,17 +78,10 @@ const mapStateToProps = (state) => {
       isAuthenticated: state.auth.isAuthenticated,
     };
   }
-  // state.auth.user
-  //   ? {
-  //       item: state.item, //item is the name of our reducer
-  //       isAuthenticated: state.auth.isAuthenticated,
-  //       userId: state.auth.user._id,
-  //     }
-  //   : {
-  //       item: state.item, //item is the name of our reducer
-  //       isAuthenticated: state.auth.isAuthenticated,
-  //     };
 };
-export default connect(mapStateToProps, { getItems, getLists, deleteItem })(
-  GroceryList
-); //allows us to take itemstate into a compenent property
+export default connect(mapStateToProps, {
+  getItems,
+  getLists,
+  deleteItem,
+  deleteList,
+})(GroceryList); //allows us to take itemstate into a compenent property

@@ -92,7 +92,7 @@ class ItemModal extends Component {
 }
 
 const mapStateToProps = (state) => ({
-  item: state.item,
+  item: state.item, //state is the application state, item is the reducername.
   isAuthenticated: state.auth.isAuthenticated,
 });
 

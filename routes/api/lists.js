@@ -74,7 +74,6 @@ router.post("/:userid", auth, (req, res) => {
       if (!user) {
         return res.status(404).end();
       }
-
       user.listCollection.unshift({
         listName: req.body.listName,
         groceryList: {
@@ -86,13 +85,9 @@ router.post("/:userid", auth, (req, res) => {
       user
         .save()
         .then((result) => {
-          console.log(result);
-          return res.status(202).json(user);
+          return res.status(202).json(user.listCollection[0]);
         })
         .catch((err) => console.log(err));
-      // user.save(function (err, user) {
-      //   res.status(200).json(user);
-      // });
     })
     .catch((err) => res.status(404).json({ success: false }));
 });

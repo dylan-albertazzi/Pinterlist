@@ -24,9 +24,16 @@ export default function (state = initialState, action) {
         loading: false, //turn off loading once you have the payload
       };
     case ADD_LIST:
+      console.log("==Add list payload: ", action.payload);
+      console.log("==action payload of add list", action.payload);
       return {
         ...state,
         lists: [action.payload, ...state.lists],
+      };
+    case DELETE_LIST:
+      return {
+        ...state,
+        lists: state.lists.filter((list) => list._id !== action.payload),
       };
 
     case ITEMS_LOADING:
