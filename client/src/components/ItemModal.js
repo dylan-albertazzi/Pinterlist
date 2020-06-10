@@ -18,7 +18,7 @@ import PropTypes from "prop-types";
 class ItemModal extends Component {
   state = {
     modal: false,
-    name: "",
+    ingredientName: "",
   };
 
   static propTypes = {
@@ -41,11 +41,12 @@ class ItemModal extends Component {
     console.log(this.state);
     console.log(this.props);
     const newItem = {
-      name: this.state.name,
+      ingredientName: this.state.ingredientName,
+      quantity: this.state.quantity,
     };
 
     //Add item via addItem action
-    this.props.addItem(newItem);
+    this.props.addItem(this.props.userid, this.props.listid, newItem);
 
     //close modal
     this.toggle();
@@ -71,12 +72,20 @@ class ItemModal extends Component {
           <ModalBody>
             <Form onSubmit={this.onSubmit}>
               <FormGroup>
-                <Label for="item">Item</Label>
+                <Label for="ingredientName">Name</Label>
                 <Input
                   type="text"
-                  name="name"
-                  id="item"
-                  placeholder="Add shopping item"
+                  name="ingredientName"
+                  id="ingredientName"
+                  placeholder="Add item"
+                  onChange={this.onChange}
+                ></Input>
+                <Label for="quantity">Quantity</Label>
+                <Input
+                  type="number"
+                  name="quantity"
+                  id="quantity"
+                  placeholder="Quantity"
                   onChange={this.onChange}
                 ></Input>
                 <Button color="dark" style={{ marginTop: "2rem" }} block>

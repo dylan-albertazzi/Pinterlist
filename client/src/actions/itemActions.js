@@ -4,13 +4,14 @@ import { tokenConfig } from "./authActions";
 import { returnErrors } from "./errorActions";
 
 //get Lists -> turn in to get items
-export const getItems = (userid) => (dispatch, getState) => {
+export const getItems = (userid, listid) => (dispatch, getState) => {
   //dispatch allows us to send async requests
   console.log("== In action");
   console.log("== userid", userid);
+  console.log("== listid", listid);
   dispatch(setItemsLoading());
   axios
-    .get(`/api/lists/${userid}`, tokenConfig(getState)) //make request to api endpoint
+    .get(`/api/lists/${userid}/${listid}`, tokenConfig(getState)) //make request to api endpoint
     .then((res) => {
       console.log("== res.data: ", res.data);
       dispatch({
@@ -23,9 +24,9 @@ export const getItems = (userid) => (dispatch, getState) => {
     );
 };
 
-export const addItem = (item) => (dispatch, getState) => {
+export const addItem = (userid, listid, item) => (dispatch, getState) => {
   axios
-    .post("/api/items", item, tokenConfig(getState))
+    .post(`/api/lists/${userid}/${listid}`, item, tokenConfig(getState))
     .then((res) =>
       dispatch({
         type: ADD_ITEM,

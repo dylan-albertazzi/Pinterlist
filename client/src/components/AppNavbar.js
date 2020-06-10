@@ -14,9 +14,10 @@ import PropTypes from "prop-types";
 import RegisterModal from "./auth/RegisterModal";
 import Logout from "./auth/Logout";
 import LoginModal from "./auth/LoginModal";
+import { Link } from "react-router-dom";
 
 class AppNavbar extends Component {
-  state = {
+  navState = {
     isOpen: false,
   };
 
@@ -25,8 +26,8 @@ class AppNavbar extends Component {
   };
 
   toggle = () => {
-    this.setState({
-      isOpen: !this.state.isOpen,
+    this.setNavState({
+      isOpen: !this.navState.isOpen,
     });
   };
 
@@ -40,6 +41,16 @@ class AppNavbar extends Component {
             <strong>{user ? `Welcome ${user.name}` : ``}</strong>
           </span>
         </NavItem>
+
+        <Link
+          className="navbar-text mr-3"
+          to={user ? `/lists/${this.props.userId}` : ``}
+        >
+          <NavItem>Grocery Lists</NavItem>
+        </Link>
+        <Link className="navbar-text mr-3" to="/about">
+          <NavItem>About</NavItem>
+        </Link>
         <NavItem>
           <Logout />
         </NavItem>
@@ -63,7 +74,7 @@ class AppNavbar extends Component {
           <Container>
             <NavbarBrand href="/">Pinterlist</NavbarBrand>
             <NavbarToggler onClick={this.toggle} />
-            <Collapse isOpen={this.state.isOpen} navbar>
+            <Collapse isOpen={this.navState.isOpen} navbar>
               <Nav className="ml-auto" navbar>
                 {isAuthenticated ? authLinks : guestLinks}
               </Nav>
@@ -75,8 +86,23 @@ class AppNavbar extends Component {
   }
 }
 
-const mapStateToProps = (state) => ({
-  auth: state.auth,
-});
+const mapStateToProps = (state) => {
+  if (state.auth.user) {
+    return {
+      list: state.list,
+      item: state.item, //item is the name of our reducer
+      isAuthenticated: state.auth.isAuthenticated,
+      userId: state.auth.user._id,
+      auth: state.auth,
+    };
+  } else {
+    return {
+      list: state.list,
+      item: state.item, //item is the name of our reducer
+      isAuthenticated: state.auth.isAuthenticated,
+      auth: state.auth,
+    };
+  }
+};
 
 export default connect(mapStateToProps, null)(AppNavbar);

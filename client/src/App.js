@@ -1,10 +1,12 @@
 import React, { Component } from "react";
 import AppNavbar from "./components/AppNavbar";
-import GroceryList from "./components/GroceryList";
+import GroceryLists from "./components/GroceryLists";
+import SingleList from "./components/SingleList";
 import ItemModal from "./components/ItemModal";
 import ListModal from "./components/ListModal";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Container } from "reactstrap";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
 import { Provider } from "react-redux";
 import store from "./store";
@@ -19,14 +21,21 @@ class App extends Component {
   render() {
     return (
       <Provider store={store}>
-        <div className="App">
-          <AppNavbar />
-          <Container>
-            <ItemModal />
-            <ListModal />
-            <GroceryList />
-          </Container>
-        </div>
+        <Router>
+          <div className="App">
+            <AppNavbar />
+            <Container>
+              <Switch>
+                <Route path="/lists/:userid" component={GroceryLists} />
+                <Route
+                  path="/list/:userid/:listid"
+                  exact
+                  component={SingleList}
+                />
+              </Switch>
+            </Container>
+          </div>
+        </Router>
       </Provider>
     );
   }

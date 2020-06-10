@@ -21,7 +21,7 @@ export default function (state = initialState, action) {
       console.log("== payload:", action.payload);
       return {
         ...state,
-        items: action.payload,
+        items: action.payload.groceryList.itemCollection,
         loading: false, //turn off loading once you have the payload
       };
     case DELETE_ITEM:

@@ -9,6 +9,7 @@ const User = require("../../models/User");
 // @desc add an item to a grocery list
 // @access Private
 router.post("/:userid/:listid", auth, (req, res) => {
+  console.log("== In post ingredient: ", req.body);
   //find a user with the given userid and with a list collection containing listid
   User.updateOne(
     {

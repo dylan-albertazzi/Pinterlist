@@ -5,8 +5,10 @@ import { connect } from "react-redux";
 import { getItems, deleteItem } from "../actions/itemActions";
 import { getLists, deleteList } from "../actions/listActions";
 import PropTypes from "prop-types";
+import ListModal from "./ListModal";
+import { Link } from "react-router-dom";
 
-class GroceryList extends Component {
+class GroceryLists extends Component {
   static propTypes = {
     getItems: PropTypes.func.isRequired,
     item: PropTypes.object.isRequired,
@@ -35,6 +37,7 @@ class GroceryList extends Component {
     // console.log("==After typeof");
     return (
       <Container>
+        <ListModal />
         <ListGroup>
           <TransitionGroup className="grocery-list">
             {lists.map(({ _id, listName }) => (
@@ -51,7 +54,10 @@ class GroceryList extends Component {
                     </Button>
                   ) : null}
 
-                  {listName}
+                  <Link to={`/list/${this.props.userId}/${_id}`}>
+                    {" "}
+                    {listName}{" "}
+                  </Link>
                 </ListGroupItem>
               </CSSTransition>
             ))}
@@ -84,4 +90,4 @@ export default connect(mapStateToProps, {
   getLists,
   deleteItem,
   deleteList,
-})(GroceryList); //allows us to take itemstate into a compenent property
+})(GroceryLists); //allows us to take itemstate into a compenent property
