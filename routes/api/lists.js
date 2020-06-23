@@ -199,4 +199,48 @@ router.delete("/:userid/:listid/:itemid", auth, (req, res) => {
     });
 });
 
+// @route POST api/lists/:userid/:listid/addPin
+// @desc add a pinterest recipe to a grocery list
+// @access Private
+router.post("/:userid/:listid/addPin", auth, (req, res) => {
+  console.log("== In add ingredient: ", req.body);
+
+  var spawn = require("child_process").spawn;
+
+  //if cleaned send to URL, if not don't respond
+  var process = spawn("python3", [
+    "pinScraping/scraping_main.py",
+    req.body.pinURL,
+  ]);
+  console.log("== child process starting");
+  // Takes recipe data from the python script and loads it into a json object called 'payload'
+
+  process.stdout.on("data", function (data) {
+    console.log("Pipe data from python script ...");
+
+    //The following is a very hacky way to get the output of the python into a JSON object
+
+    dataStr = data.toString();
+
+    var str_to_Arr = dataStr.split("\n");
+    str_to_Arr.splice(-1, 1);
+
+    const str1 = '{ "ingredients": [';
+    jsonArr = str1.concat(str_to_Arr, "]}");
+
+    var payload = JSON.parse(jsonArr); //turns recipe data into a json obj
+
+    context = payload;
+
+    if (context.ingredients) {
+      res.status(202).json(context);
+    } else {
+      res.status(404).json({
+        success: false,
+        fail_on: "Could not get items from provided URL",
+      });
+    }
+  });
+});
+
 module.exports = router;

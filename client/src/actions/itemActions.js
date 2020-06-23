@@ -38,6 +38,27 @@ export const addItem = (userid, listid, item) => (dispatch, getState) => {
     );
 };
 
+export const addPin = (userid, listid, pinURL) => (dispatch, getState) => {
+  //post to pin s
+  axios
+    .post(`/api/lists/${userid}/${listid}/addPin`, item, tokenConfig(getState))
+    .then((res) => {})
+    .catch((err) =>
+      dispatch(returnErrors(err.response.data, err.response.status))
+    );
+  // axios
+  //   .post(`/api/lists/${userid}/${listid}`, item, tokenConfig(getState))
+  //   .then((res) =>
+  //     dispatch({
+  //       type: ADD_ITEM,
+  //       payload: res.data,
+  //     })
+  //   )
+  //   .catch((err) =>
+  //     dispatch(returnErrors(err.response.data, err.response.status))
+  //   );
+};
+
 export const deleteItem = (userid, listid, itemid) => (dispatch, getState) => {
   console.log("==in delete item func");
   axios

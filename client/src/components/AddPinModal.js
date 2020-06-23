@@ -12,7 +12,7 @@ import {
 
 //Container - a component that is hooked to redux
 import { connect } from "react-redux";
-import { addItem } from "../actions/itemActions";
+import { addPin } from "../actions/itemActions";
 import PropTypes from "prop-types";
 
 class AddPinModal extends Component {
@@ -40,13 +40,13 @@ class AddPinModal extends Component {
     console.log("state n props: ");
     console.log(this.state);
     console.log(this.props);
-    const newItem = {
-      ingredientName: this.state.ingredientName,
-      quantity: this.state.quantity,
-    };
+    // const newItem = {
+    //   ingredientName: this.state.ingredientName,
+    //   quantity: this.state.quantity,
+    // };
 
-    //Add item via addItem action
-    this.props.addItem(this.props.userid, this.props.listid, newItem);
+    //Add pin via addPin action
+    this.props.addPin(this.props.userid, this.props.listid, pinUrl);
 
     //close modal
     this.toggle();
@@ -61,35 +61,30 @@ class AddPinModal extends Component {
             style={{ marginBottom: "2rem" }}
             onClick={this.toggle}
           >
-            Add Item
+            Add Pinterest Recipe
           </Button>
         ) : (
           <h4 className="mb-3 ml-4">Please log in to manage items</h4>
         )}
 
         <Modal isOpen={this.state.modal} toggle={this.toggle}>
-          <ModalHeader toggle={this.toggle}>Add To Shopping List</ModalHeader>
+          <ModalHeader toggle={this.toggle}>
+            Add a Pinterest Recipe to Shopping List
+          </ModalHeader>
           <ModalBody>
             <Form onSubmit={this.onSubmit}>
               <FormGroup>
-                <Label for="ingredientName">Name</Label>
+                <Label for="pinURL">Pinterest URL</Label>
                 <Input
-                  type="text"
-                  name="ingredientName"
-                  id="ingredientName"
+                  type="url"
+                  name="pinURL"
+                  id="pinURL"
                   placeholder="Add item"
                   onChange={this.onChange}
                 ></Input>
-                <Label for="quantity">Quantity</Label>
-                <Input
-                  type="number"
-                  name="quantity"
-                  id="quantity"
-                  placeholder="Quantity"
-                  onChange={this.onChange}
-                ></Input>
+
                 <Button color="dark" style={{ marginTop: "2rem" }} block>
-                  Add Item
+                  Add Pin
                 </Button>
               </FormGroup>
             </Form>
@@ -105,4 +100,4 @@ const mapStateToProps = (state) => ({
   isAuthenticated: state.auth.isAuthenticated,
 });
 
-export default connect(mapStateToProps, { addItem })(ItemModal);
+export default connect(mapStateToProps, { addPin })(AddPinModal);

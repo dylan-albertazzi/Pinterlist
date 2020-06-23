@@ -9,7 +9,7 @@ from string_to_object import clean_string, get_multiple_items
 def make_recipe_list(url):
     #Normal: https://www.shelikesfood.com/crispy-baked-black-bean-sweet-potato-tacos/
     # url = 'https://30daysofgreekfood.com/greek-white-bean-soup-fasolada-lemon-tomato/'
-    print(url)
+    
     source = requests.get(url).text
 
     soup = BeautifulSoup(source, 'lxml')
@@ -78,10 +78,12 @@ def make_recipe_list(url):
                         cleaned_item = clean_string(item.text)
                         
                         for many_item in get_multiple_items(cleaned_item):
+                          
                             recipe_items_list.append(many_item)
 
-    for item in recipe_items_list:    
-        print(item)
+    for item in recipe_items_list: 
+       
+            print(f'"{item}"')
     return recipe_items_list
 
 make_recipe_list('https://diethood.com/roasted-garlic-parmesan-carrots/')
