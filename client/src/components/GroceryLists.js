@@ -23,6 +23,10 @@ class GroceryLists extends Component {
     }
   }
 
+  componentDidMount() {
+    this.props.getLists(this.props.userId);
+  }
+
   onDeleteClick = (id) => {
     console.log("== in onDeleteClick:", id);
     console.log("==userid: ", this.props.userId);

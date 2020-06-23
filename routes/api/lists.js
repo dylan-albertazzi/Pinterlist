@@ -1,15 +1,19 @@
 const express = require("express");
 const router = express.Router();
 const auth = require("../../middleware/auth");
+const uuid = require("uuid");
 
 //Import User model
 const User = require("../../models/User");
+const { ObjectId } = require("mongodb");
+const { db } = require("../../models/User");
 
 // @route POST api/lists/:userid/:listid
 // @desc add an item to a grocery list
 // @access Private
 router.post("/:userid/:listid", auth, (req, res) => {
   console.log("== In post ingredient: ", req.body);
+  item_id = uuid.v4();
   //find a user with the given userid and with a list collection containing listid
   User.updateOne(
     {
@@ -20,6 +24,7 @@ router.post("/:userid/:listid", auth, (req, res) => {
       //push the new ingredient to the list
       $push: {
         "listCollection.$.groceryList.itemCollection": {
+          id: item_id,
           ingredientName: req.body.ingredientName,
           quantity: req.body.quantity,
         },
@@ -27,7 +32,12 @@ router.post("/:userid/:listid", auth, (req, res) => {
     }
   )
     .then((user) => {
-      return res.status(202).json(user);
+      returnItem = {
+        id: item_id,
+        ingredientName: req.body.ingredientName,
+        quantity: req.body.quantity,
+      };
+      return res.status(202).json(returnItem);
     })
     .catch((err) => {
       console.log(err);
@@ -39,12 +49,9 @@ router.post("/:userid/:listid", auth, (req, res) => {
 // @desc get a specific grocery list
 // @access Private
 router.get("/:userid/:listid", auth, (req, res) => {
-  console.log("== hello hello");
-
   //find a user with the given userid and with a list collection containing listid
   User.find(
     {
-      //USE THIS FIND CODE FOR GET
       _id: req.params.userid,
       "listCollection._id": req.params.listid,
     },
@@ -67,15 +74,12 @@ router.get("/:userid/:listid", auth, (req, res) => {
 // @desc Make a new grocery list
 // @access Private
 router.post("/:userid", auth, (req, res) => {
-  console.log("We're in the post section");
   User.findById(req.params.userid, "listCollection")
     .then((user) => {
-      console.log("== made it to user");
-      console.log("== req.bod.listName", req.body.listName);
       if (!user) {
         return res.status(404).end();
       }
-      user.listCollection.unshift({
+      user.listCollection.push({
         listName: req.body.listName,
         groceryList: {
           itemCollection: [],
@@ -86,7 +90,13 @@ router.post("/:userid", auth, (req, res) => {
       user
         .save()
         .then((result) => {
-          return res.status(202).json(user.listCollection[0]);
+          console.log(
+            "== json return:",
+            user.listCollection[user.listCollection.length - 1]
+          );
+          return res
+            .status(202)
+            .json(user.listCollection[user.listCollection.length - 1]);
         })
         .catch((err) => console.log(err));
     })
@@ -124,7 +134,7 @@ router.post("/", auth, (req, res) => {
   newItem.save().then((item) => res.json(item));
 });
 
-// @route DELETE api/lists/:userid/:id
+// @route DELETE api/lists/:userid/:listid
 // @desc Delete selected list
 // @access Private
 router.delete("/:userid/:listid", auth, (req, res) => {
@@ -149,6 +159,43 @@ router.delete("/:userid/:listid", auth, (req, res) => {
       res
         .status(404)
         .json({ success: false, fail_on: "This list does not exist." });
+    });
+});
+
+// @route DELETE api/lists/:userid/:listid/:itemid
+// @desc Delete selected item in list
+// @access Private
+
+router.delete("/:userid/:listid/:itemid", auth, (req, res) => {
+  console.log("== in delete2 action");
+  console.log("==itemid, ", req.params.itemid);
+
+  User.updateOne(
+    {
+      listCollection: {
+        $elemMatch: {
+          "groceryList.itemCollection": {
+            $elemMatch: { id: req.params.itemid },
+          },
+        },
+      },
+    },
+    {
+      $pull: {
+        "listCollection.$.groceryList.itemCollection": {
+          id: req.params.itemid,
+        },
+      },
+    }
+  )
+    .then(() => {
+      res.status(202).json(req.params.itemid);
+    })
+    .catch((err) => {
+      console.log(err);
+      res
+        .status(404)
+        .json({ success: false, fail_on: "This item does not exist." });
     });
 });
 

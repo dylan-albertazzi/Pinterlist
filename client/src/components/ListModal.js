@@ -12,7 +12,7 @@ import {
 
 //Container - a component that is hooked to redux
 import { connect } from "react-redux";
-import { addList, getList } from "../actions/listActions";
+import { addList } from "../actions/listActions";
 import PropTypes from "prop-types";
 
 class ListModal extends Component {

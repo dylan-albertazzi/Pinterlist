@@ -31,6 +31,7 @@ export default function (state = initialState, action) {
         lists: [action.payload, ...state.lists],
       };
     case DELETE_LIST:
+      console.log("Delete list payload:", action.payload);
       return {
         ...state,
         lists: state.lists.filter((list) => list._id !== action.payload),

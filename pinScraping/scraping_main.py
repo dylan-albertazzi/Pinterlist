@@ -2,8 +2,8 @@ from bs4 import BeautifulSoup
 from bs4.element import Tag
 import requests
 from fractions import Fraction
-from .re_vulgar_fractions import check_vulgar
-from .string_to_object import clean_string, get_multiple_items
+# from re_vulgar_fractions import check_vulgar
+from string_to_object import clean_string, get_multiple_items
 
 
 def make_recipe_list(url):

@@ -16,20 +16,38 @@ class SingleList extends Component {
   };
 
   componentDidUpdate(prevProps) {
-    if (this.props.userId !== prevProps.userId) {
+    console.log("==items length:", this.props.item.items.length);
+    if (this.props.item.items.length !== prevProps.item.items.length) {
       this.props.getItems(this.props.userId, this.props.match.params.listid);
     }
+  }
+
+  componentDidMount() {
+    this.props.getItems(this.props.userId, this.props.match.params.listid);
   }
 
   onDeleteClick = (id) => {
     console.log("== in onDeleteClick:", id);
     console.log("==userid: ", this.props.userId);
-    this.props.deleteList(id, this.props.userId);
+    this.props.deleteItem(
+      this.props.userId,
+      this.props.match.params.listid,
+      id
+    );
   };
 
   render() {
     console.log("== in single list render props:", this.props);
     const { items } = this.props.item;
+    console.log("Items: ", items);
+    // const rev_items = this.props.item.items;
+    // if (rev_items) {
+    //   var items = rev_items.reverse();
+    //   console.log("==reversed items:", items);
+    // } else {
+    //   var items = rev_items;
+    //   console.log("==Not reversed items:", items);
+    // }
 
     // console.log("== typeof");
     // console.log(typeof this.props.userId);
@@ -44,24 +62,27 @@ class SingleList extends Component {
 
         <ListGroup>
           <TransitionGroup className="grocery-list">
-            {items.map(({ _id, ingredientName }) => (
-              <CSSTransition key={_id} timeout={500} classNames="fade">
-                <ListGroupItem>
-                  {this.props.isAuthenticated ? (
-                    <Button
-                      className="remove-btn"
-                      color="danger"
-                      size="sm"
-                      onClick={this.onDeleteClick.bind(this, _id)}
-                    >
-                      &times;
-                    </Button>
-                  ) : null}
+            {items
+              .slice(0)
+              .reverse()
+              .map(({ id, ingredientName }) => (
+                <CSSTransition key={id} timeout={500} classNames="fade">
+                  <ListGroupItem>
+                    {this.props.isAuthenticated ? (
+                      <Button
+                        className="remove-btn"
+                        color="danger"
+                        size="sm"
+                        onClick={this.onDeleteClick.bind(this, id)}
+                      >
+                        &times;
+                      </Button>
+                    ) : null}
 
-                  {ingredientName}
-                </ListGroupItem>
-              </CSSTransition>
-            ))}
+                    {ingredientName}
+                  </ListGroupItem>
+                </CSSTransition>
+              ))}
           </TransitionGroup>
         </ListGroup>
       </Container>

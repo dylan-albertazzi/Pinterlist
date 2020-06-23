@@ -2,7 +2,7 @@ import nltk
 # nltk.download('averaged_perceptron_tagger')
 from nltk.corpus import wordnet as wn
 from nltk.tokenize import word_tokenize
-from .re_vulgar_fractions import check_vulgar
+from re_vulgar_fractions import check_vulgar
 import re
 
 measurement_types = {

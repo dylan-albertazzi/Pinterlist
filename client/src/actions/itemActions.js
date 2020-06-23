@@ -38,10 +38,10 @@ export const addItem = (userid, listid, item) => (dispatch, getState) => {
     );
 };
 
-export const deleteItem = (listid, userid) => (dispatch, getState) => {
+export const deleteItem = (userid, listid, itemid) => (dispatch, getState) => {
   console.log("==in delete item func");
   axios
-    .delete(`/api/lists/${userid}/${listid}`, tokenConfig(getState))
+    .delete(`/api/lists/${userid}/${listid}/${itemid}`, tokenConfig(getState))
     .then((res) =>
       dispatch({
         type: DELETE_ITEM,
