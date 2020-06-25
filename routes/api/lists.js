@@ -203,7 +203,7 @@ router.delete("/:userid/:listid/:itemid", auth, (req, res) => {
 // @desc add a pinterest recipe to a grocery list
 // @access Private
 router.post("/:userid/:listid/addPin", auth, (req, res) => {
-  console.log("== In add ingredient: ", req.body);
+  console.log("== In add ingredient cool path: ", req.body.pinURL);
 
   var spawn = require("child_process").spawn;
 
@@ -217,23 +217,11 @@ router.post("/:userid/:listid/addPin", auth, (req, res) => {
 
   process.stdout.on("data", function (data) {
     console.log("Pipe data from python script ...");
+    var payload = JSON.parse(data.toString()); //turns recipe data into a json obj
+    console.log("==Payload: ", payload);
 
-    //The following is a very hacky way to get the output of the python into a JSON object
-
-    dataStr = data.toString();
-
-    var str_to_Arr = dataStr.split("\n");
-    str_to_Arr.splice(-1, 1);
-
-    const str1 = '{ "ingredients": [';
-    jsonArr = str1.concat(str_to_Arr, "]}");
-
-    var payload = JSON.parse(jsonArr); //turns recipe data into a json obj
-
-    context = payload;
-
-    if (context.ingredients) {
-      res.status(202).json(context);
+    if (payload.items) {
+      res.status(202).json(payload);
     } else {
       res.status(404).json({
         success: false,

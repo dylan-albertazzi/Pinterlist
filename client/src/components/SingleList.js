@@ -5,6 +5,7 @@ import { connect } from "react-redux";
 import { getItems, deleteItem } from "../actions/itemActions";
 import PropTypes from "prop-types";
 import ItemModal from "./ItemModal";
+import AddPinModal from "./AddPinModal";
 
 class SingleList extends Component {
   static propTypes = {
@@ -12,7 +13,7 @@ class SingleList extends Component {
     item: PropTypes.object.isRequired,
     list: PropTypes.object.isRequired,
     isAuthenticated: PropTypes.bool,
-    userId: PropTypes.object,
+    userId: PropTypes.string,
   };
 
   componentDidUpdate(prevProps) {
@@ -56,6 +57,10 @@ class SingleList extends Component {
       <Container>
         <h1>Hello</h1>
         <ItemModal
+          userid={this.props.userId}
+          listid={this.props.match.params.listid}
+        />
+        <AddPinModal
           userid={this.props.userId}
           listid={this.props.match.params.listid}
         />

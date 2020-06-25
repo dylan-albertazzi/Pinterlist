@@ -4,7 +4,8 @@ import requests
 from fractions import Fraction
 # from re_vulgar_fractions import check_vulgar
 from string_to_object import clean_string, get_multiple_items
-
+import sys
+import json
 
 def make_recipe_list(url):
     #Normal: https://www.shelikesfood.com/crispy-baked-black-bean-sweet-potato-tacos/
@@ -17,7 +18,7 @@ def make_recipe_list(url):
 
 
     lists = soup.select('body ul')
-
+    data = {}
     
 
     # class recipe_item(): #Not used rn
@@ -78,12 +79,13 @@ def make_recipe_list(url):
                         cleaned_item = clean_string(item.text)
                         
                         for many_item in get_multiple_items(cleaned_item):
-                          
                             recipe_items_list.append(many_item)
 
-    for item in recipe_items_list: 
-       
-            print(f'"{item}"')
+    data['items'] = recipe_items_list
+    json_data = json.dumps(data)
+    print(json_data) #this sends it to stdout so it can be used by node
     return recipe_items_list
 
-make_recipe_list('https://diethood.com/roasted-garlic-parmesan-carrots/')
+
+
+make_recipe_list(sys.argv[1])

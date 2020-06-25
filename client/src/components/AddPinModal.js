@@ -18,7 +18,7 @@ import PropTypes from "prop-types";
 class AddPinModal extends Component {
   state = {
     modal: false,
-    ingredientName: "",
+    pinURL: "",
   };
 
   static propTypes = {
@@ -33,6 +33,7 @@ class AddPinModal extends Component {
 
   onChange = (e) => {
     this.setState({ [e.target.name]: e.target.value });
+    console.log("==targ name:", e.target.name);
   };
 
   onSubmit = (e) => {
@@ -46,7 +47,7 @@ class AddPinModal extends Component {
     // };
 
     //Add pin via addPin action
-    this.props.addPin(this.props.userid, this.props.listid, pinUrl);
+    this.props.addPin(this.props.userid, this.props.listid, this.state.pinURL);
 
     //close modal
     this.toggle();
@@ -96,7 +97,7 @@ class AddPinModal extends Component {
 }
 
 const mapStateToProps = (state) => ({
-  item: state.item, //state is the application state, item is the reducername.
+  // item: state.item, //state is the application state, item is the reducername.
   isAuthenticated: state.auth.isAuthenticated,
 });
 

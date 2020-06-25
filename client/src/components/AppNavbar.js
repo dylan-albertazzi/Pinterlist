@@ -15,7 +15,7 @@ import RegisterModal from "./auth/RegisterModal";
 import Logout from "./auth/Logout";
 import LoginModal from "./auth/LoginModal";
 import { Link } from "react-router-dom";
-
+import "../App.css";
 class AppNavbar extends Component {
   navState = {
     isOpen: false,
@@ -70,9 +70,21 @@ class AppNavbar extends Component {
 
     return (
       <div>
-        <Navbar color="dark" dark expand="sm" className="mb-5">
+        <Navbar
+          color="light"
+          light
+          expand="sm"
+          className="mb-5 pt-3 navbar-main"
+        >
           <Container>
-            <NavbarBrand href="/">Pinterlist</NavbarBrand>
+            <NavbarBrand href="#">
+              <img
+                src={
+                  process.env.PUBLIC_URL + "/images/Pinterlist-logo-main.png"
+                }
+                height="70"
+              />
+            </NavbarBrand>
             <NavbarToggler onClick={this.toggle} />
             <Collapse isOpen={this.navState.isOpen} navbar>
               <Nav className="ml-auto" navbar>

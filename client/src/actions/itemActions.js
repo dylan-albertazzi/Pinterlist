@@ -40,9 +40,37 @@ export const addItem = (userid, listid, item) => (dispatch, getState) => {
 
 export const addPin = (userid, listid, pinURL) => (dispatch, getState) => {
   //post to pin s
+  console.log("==in add pin post:", pinURL);
+  console.log("==url type", typeof pinURL);
   axios
-    .post(`/api/lists/${userid}/${listid}/addPin`, item, tokenConfig(getState))
-    .then((res) => {})
+    .post(
+      `/api/lists/${userid}/${listid}/addPin`,
+      { pinURL: pinURL },
+      tokenConfig(getState)
+    )
+    .then((res) => {
+      console.log("== made it to response:", res);
+      var i;
+      for (i = 0; i < res.data.items.length; i++) {
+        var item = {
+          ingredientName: res.data.items[i],
+          quantity: 1,
+        };
+        console.log("== almost added item");
+        axios
+          .post(`/api/lists/${userid}/${listid}`, item, tokenConfig(getState))
+          .then((res) =>
+            dispatch({
+              type: ADD_ITEM,
+              payload: res.data,
+            })
+          )
+          .catch((err) =>
+            dispatch(returnErrors(err.response.data, err.response.status))
+          );
+        console.log("==added item");
+      }
+    })
     .catch((err) =>
       dispatch(returnErrors(err.response.data, err.response.status))
     );
