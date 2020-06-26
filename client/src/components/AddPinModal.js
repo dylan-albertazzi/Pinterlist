@@ -58,8 +58,7 @@ class AddPinModal extends Component {
       <div>
         {this.props.isAuthenticated ? (
           <Button
-            color="dark"
-            style={{ marginBottom: "2rem" }}
+            className="btn-block p-0 pl-2 text-left mb-2"
             onClick={this.toggle}
           >
             Add Pinterest Recipe

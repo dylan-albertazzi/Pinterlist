@@ -1,4 +1,4 @@
-import React, { Component, Fragment } from "react";
+import React, { Component, Fragment, useState } from "react";
 import {
   Collapse,
   Navbar,
@@ -17,7 +17,7 @@ import LoginModal from "./auth/LoginModal";
 import { Link } from "react-router-dom";
 import "../App.css";
 class AppNavbar extends Component {
-  navState = {
+  state = {
     isOpen: false,
   };
 
@@ -26,8 +26,8 @@ class AppNavbar extends Component {
   };
 
   toggle = () => {
-    this.setNavState({
-      isOpen: !this.navState.isOpen,
+    this.setState({
+      isOpen: !this.state.isOpen,
     });
   };
 
@@ -37,23 +37,22 @@ class AppNavbar extends Component {
     const authLinks = (
       <Fragment>
         <NavItem>
-          <span className="navbar-text mr-3">
+          <span className="navbar-text-color mr-3">
             <strong>{user ? `Welcome ${user.name}` : ``}</strong>
           </span>
         </NavItem>
 
         <Link
-          className="navbar-text mr-3"
+          className="navbar-text-color mr-3"
           to={user ? `/lists/${this.props.userId}` : ``}
         >
           <NavItem>Grocery Lists</NavItem>
         </Link>
-        <Link className="navbar-text mr-3" to="/about">
+        <Link className="navbar-text-color mr-3" to="/about">
           <NavItem>About</NavItem>
         </Link>
-        <NavItem>
-          <Logout />
-        </NavItem>
+
+        <Logout />
       </Fragment>
     );
 
@@ -71,10 +70,10 @@ class AppNavbar extends Component {
     return (
       <div>
         <Navbar
-          color="light"
           light
+          collapseOnSelect
           expand="sm"
-          className="mb-5 pt-3 navbar-main"
+          className="mb-5 pt-3 color-nav"
         >
           <Container>
             <NavbarBrand href="#">
@@ -85,8 +84,8 @@ class AppNavbar extends Component {
                 height="70"
               />
             </NavbarBrand>
-            <NavbarToggler onClick={this.toggle} />
-            <Collapse isOpen={this.navState.isOpen} navbar>
+            <NavbarToggler className="toggle-color" onClick={this.toggle} />
+            <Collapse variant="dark" dark isOpen={this.state.isOpen} navbar>
               <Nav className="ml-auto" navbar>
                 {isAuthenticated ? authLinks : guestLinks}
               </Nav>

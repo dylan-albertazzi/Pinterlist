@@ -46,21 +46,20 @@ class GroceryLists extends Component {
           <TransitionGroup className="grocery-list">
             {lists.map(({ _id, listName }) => (
               <CSSTransition key={_id} timeout={500} classNames="fade">
-                <ListGroupItem>
-                  {this.props.isAuthenticated ? (
-                    <Button
-                      className="remove-btn"
-                      color="danger"
-                      size="sm"
-                      onClick={this.onDeleteClick.bind(this, _id)}
-                    >
-                      &times;
-                    </Button>
-                  ) : null}
-
-                  <Link to={`/list/${this.props.userId}/${_id}`}>
+                <ListGroupItem className="d-flex justify-content-between p-2">
+                  <Link
+                    className="align-content-center"
+                    to={`/list/${this.props.userId}/${_id}`}
+                  >
                     {" "}
                     {listName}{" "}
+                  </Link>
+                  <Link
+                    className="remove-btn btn-toolbar align-content-center"
+                    size="sm"
+                    onClick={this.onDeleteClick.bind(this, _id)}
+                  >
+                    <i class="fa fa-trash-o"></i>
                   </Link>
                 </ListGroupItem>
               </CSSTransition>

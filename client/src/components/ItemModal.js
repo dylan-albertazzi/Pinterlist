@@ -57,8 +57,7 @@ class ItemModal extends Component {
       <div>
         {this.props.isAuthenticated ? (
           <Button
-            color="dark"
-            style={{ marginBottom: "2rem" }}
+            className="btn-block p-0 pl-2 text-left"
             onClick={this.toggle}
           >
             Add Item

@@ -6,6 +6,7 @@ import { getItems, deleteItem } from "../actions/itemActions";
 import PropTypes from "prop-types";
 import ItemModal from "./ItemModal";
 import AddPinModal from "./AddPinModal";
+import { Link } from "react-router-dom";
 
 class SingleList extends Component {
   static propTypes = {
@@ -54,43 +55,46 @@ class SingleList extends Component {
     // console.log(typeof this.props.userId);
     // console.log("==After typeof");
     return (
-      <Container>
-        <h1>Hello</h1>
-        <ItemModal
-          userid={this.props.userId}
-          listid={this.props.match.params.listid}
-        />
-        <AddPinModal
-          userid={this.props.userId}
-          listid={this.props.match.params.listid}
-        />
+      <>
+        <Container className="single-list-header">
+          <h1>Hello</h1>
+        </Container>
+        <Container>
+          <AddPinModal
+            userid={this.props.userId}
+            listid={this.props.match.params.listid}
+          />
+          <ItemModal
+            userid={this.props.userId}
+            listid={this.props.match.params.listid}
+          />
 
-        <ListGroup>
-          <TransitionGroup className="grocery-list">
-            {items
-              .slice(0)
-              .reverse()
-              .map(({ id, ingredientName }) => (
-                <CSSTransition key={id} timeout={500} classNames="fade">
-                  <ListGroupItem>
-                    {this.props.isAuthenticated ? (
-                      <Button
-                        className="remove-btn"
-                        color="danger"
+          <ListGroup>
+            <TransitionGroup className="grocery-list">
+              {items
+                .slice(0)
+                .reverse()
+                .map(({ id, ingredientName }) => (
+                  <CSSTransition key={id} timeout={500} classNames="fade">
+                    <ListGroupItem className="d-flex justify-content-between p-2">
+                      <span className="align-content-center">
+                        {ingredientName}
+                      </span>
+
+                      <Link
+                        className="remove-btn btn-toolbar align-content-center"
                         size="sm"
                         onClick={this.onDeleteClick.bind(this, id)}
                       >
-                        &times;
-                      </Button>
-                    ) : null}
-
-                    {ingredientName}
-                  </ListGroupItem>
-                </CSSTransition>
-              ))}
-          </TransitionGroup>
-        </ListGroup>
-      </Container>
+                        <i class="fa fa-trash-o"></i>
+                      </Link>
+                    </ListGroupItem>
+                  </CSSTransition>
+                ))}
+            </TransitionGroup>
+          </ListGroup>
+        </Container>
+      </>
     );
   }
 }
