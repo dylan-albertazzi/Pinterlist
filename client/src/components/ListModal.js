@@ -8,6 +8,8 @@ import {
   FormGroup,
   Label,
   Input,
+  Row,
+  Col,
 } from "reactstrap";
 
 //Container - a component that is hooked to redux
@@ -52,17 +54,21 @@ class ListModal extends Component {
   render() {
     return (
       <div>
-        {this.props.isAuthenticated ? (
-          <Button
-            className="btn-block p-0 pl-2 text-left"
-            // style={{ marginBottom: "2rem" }}
-            onClick={this.toggle}
-          >
-            Add List
-          </Button>
-        ) : (
-          <h4 className="mb-3 ml-4">Please log in to manage lists</h4>
-        )}
+        <Row className="h-100">
+          <Col>
+            {this.props.isAuthenticated ? (
+              <Button
+                className="main-buttons btn-block p-0 pl-2 text-center mx-auto"
+                // style={{ marginBottom: "2rem" }}
+                onClick={this.toggle}
+              >
+                Add List
+              </Button>
+            ) : (
+              <h4 className="mb-3 ml-4">Please log in to manage lists</h4>
+            )}
+          </Col>
+        </Row>
 
         <Modal isOpen={this.state.modal} toggle={this.toggle}>
           <ModalHeader toggle={this.toggle}>

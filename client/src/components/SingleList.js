@@ -1,5 +1,12 @@
 import React, { Component } from "react";
-import { Container, ListGroup, ListGroupItem, Button } from "reactstrap";
+import {
+  Container,
+  ListGroup,
+  ListGroupItem,
+  Button,
+  Row,
+  Col,
+} from "reactstrap";
 import { CSSTransition, TransitionGroup } from "react-transition-group";
 import { connect } from "react-redux";
 import { getItems, deleteItem } from "../actions/itemActions";
@@ -56,18 +63,28 @@ class SingleList extends Component {
     // console.log("==After typeof");
     return (
       <>
-        <Container className="single-list-header">
-          <h1>Hello</h1>
-        </Container>
+        <Row className="single-list-header mr-4 h-100">
+          <Col className="my-auto">
+            <h1 className="text-center">{this.props.item.listName}</h1>
+          </Col>
+        </Row>
+
+        <br />
         <Container>
-          <AddPinModal
-            userid={this.props.userId}
-            listid={this.props.match.params.listid}
-          />
-          <ItemModal
-            userid={this.props.userId}
-            listid={this.props.match.params.listid}
-          />
+          <Row className="h-100">
+            <Col md={6} className="text-center">
+              <AddPinModal
+                userid={this.props.userId}
+                listid={this.props.match.params.listid}
+              />
+            </Col>
+            <Col md={6} className="text-center">
+              <ItemModal
+                userid={this.props.userId}
+                listid={this.props.match.params.listid}
+              />
+            </Col>
+          </Row>
 
           <ListGroup>
             <TransitionGroup className="grocery-list">
@@ -94,6 +111,16 @@ class SingleList extends Component {
             </TransitionGroup>
           </ListGroup>
         </Container>
+        <Container>
+          <Row>
+            <Col className="text-center">
+              <img
+                className="img-fluid bottom-img"
+                src={process.env.PUBLIC_URL + "/images/people-illustration.png"}
+              />
+            </Col>
+          </Row>
+        </Container>
       </>
     );
   }
@@ -105,6 +132,7 @@ const mapStateToProps = (state) => {
     return {
       list: state.list,
       item: state.item, //item is the name of our reducer
+
       isAuthenticated: state.auth.isAuthenticated,
       userId: state.auth.user._id,
     };

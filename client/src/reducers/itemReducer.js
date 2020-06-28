@@ -10,6 +10,7 @@ import {
 
 const initialState = {
   items: [],
+  listName: null,
   loading: false,
 };
 
@@ -22,6 +23,7 @@ export default function (state = initialState, action) {
       return {
         ...state,
         items: action.payload.groceryList.itemCollection,
+        listName: action.payload.listName,
         loading: false, //turn off loading once you have the payload
       };
     case DELETE_ITEM:

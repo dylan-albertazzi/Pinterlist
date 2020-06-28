@@ -6,16 +6,16 @@ import {
   Button,
   Row,
   Col,
+  Jumbotron,
 } from "reactstrap";
 import { CSSTransition, TransitionGroup } from "react-transition-group";
 import { connect } from "react-redux";
-import { getItems, deleteItem } from "../actions/itemActions";
-import { getLists, deleteList } from "../actions/listActions";
+
 import PropTypes from "prop-types";
 import ListModal from "./ListModal";
 import { Link } from "react-router-dom";
 
-class GroceryLists extends Component {
+class HomePage extends Component {
   static propTypes = {
     getItems: PropTypes.func.isRequired,
     item: PropTypes.object.isRequired,
@@ -25,14 +25,12 @@ class GroceryLists extends Component {
   };
 
   componentDidUpdate(prevProps) {
-    if (this.props.userId !== prevProps.userId) {
-      this.props.getLists(this.props.userId);
-    }
+    // if (this.props.userId !== prevProps.userId) {
+    //   this.props.getLists(this.props.userId);
+    // }
   }
 
-  componentDidMount() {
-    this.props.getLists(this.props.userId);
-  }
+  componentDidMount() {}
 
   onDeleteClick = (id) => {
     console.log("== in onDeleteClick:", id);
@@ -43,19 +41,29 @@ class GroceryLists extends Component {
   render() {
     const { lists } = this.props.list;
 
-    // console.log("== typeof");
-    // console.log(typeof this.props.userId);
-    // console.log("==After typeof");
     return (
       <>
-        <Row className="single-list-header mr-4 h-100">
+        <Jumbotron className="bg-transparent">
+          <h5>
+            Stop wasting time finding the ingredients you need from Pinterest
+            recipes!
+          </h5>
+        </Jumbotron>
+        <Row className="h-100 px-3">
           <Col className="my-auto">
-            <h4 className="text-center text-light m-0">My Grocery Lists</h4>
+            <img
+              className="img-fluid bottom-img"
+              src={process.env.PUBLIC_URL + "/images/sad-woman.png"}
+            />
+          </Col>
+          <Col className="d-flex">
+            <Button className="main-buttons start-btn btn-block mt-auto d-flex align-items-center py-3">
+              Start Here
+            </Button>
           </Col>
         </Row>
         <br />
         <Container>
-          <ListModal />
           <ListGroup>
             <TransitionGroup className="grocery-list">
               {lists.map(({ _id, listName }) => (
@@ -113,9 +121,4 @@ const mapStateToProps = (state) => {
     };
   }
 };
-export default connect(mapStateToProps, {
-  getItems,
-  getLists,
-  deleteItem,
-  deleteList,
-})(GroceryLists); //allows us to take itemstate into a compenent property
+export default connect(mapStateToProps, {})(HomePage); //allows us to take itemstate into a compenent property

@@ -2,10 +2,11 @@ import React, { Component } from "react";
 import AppNavbar from "./components/AppNavbar";
 import GroceryLists from "./components/GroceryLists";
 import SingleList from "./components/SingleList";
+import HomePage from "./components/HomePage";
 import ItemModal from "./components/ItemModal";
 import ListModal from "./components/ListModal";
 import "bootstrap/dist/css/bootstrap.min.css";
-import { Container } from "reactstrap";
+import { Container, Row, Col } from "reactstrap";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
 import { Provider } from "react-redux";
@@ -24,16 +25,16 @@ class App extends Component {
         <Router>
           <div className="App">
             <AppNavbar />
-            <Container>
-              <Switch>
-                <Route path="/lists/:userid" component={GroceryLists} />
-                <Route
-                  path="/list/:userid/:listid"
-                  exact
-                  component={SingleList}
-                />
-              </Switch>
-            </Container>
+
+            <Switch>
+              <Route path="/" exact component={HomePage} />
+              <Route path="/lists/:userid" exact component={GroceryLists} />
+              <Route
+                path="/list/:userid/:listid"
+                exact
+                component={SingleList}
+              />
+            </Switch>
           </div>
         </Router>
       </Provider>

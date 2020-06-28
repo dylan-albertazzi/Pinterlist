@@ -1,3 +1,19 @@
+h1,
+h2,
+h3,
+h4,
+h5,
+a,
+p {
+  font-family: SF-Pro, sans-serif;
+}
+
+@font-face {
+  font-family: "SF-Pro";
+  font-weight: 400;
+  src: url("https://applesocial.s3.amazonaws.com/assets/styles/fonts/sanfrancisco/sanfranciscodisplay-regular-webfont.woff");
+}
+
 li.list-group-item a {
   color: black;
 }
@@ -69,9 +85,34 @@ button.btn {
   background-color: #22d596;
   border-color: #22d596;
 }
+button.main-buttons {
+  width: 75vw;
+  height: 6vh;
+}
 
-div.container.single-list-header {
+div.single-list-header {
   background-color: #22d596;
   border-bottom-right-radius: 20px;
   border-top-right-radius: 20px;
+  min-height: 20vh;
+}
+
+button.start-btn {
+  border-bottom-right-radius: 20px;
+  border-top-left-radius: 20px;
+  border-top-right-radius: 0px;
+  border-bottom-left-radius: 0px;
+}
+
+div.single-list-header h1 {
+  color: white;
+}
+
+img.bottom-img {
+  height: 40vh;
+}
+@media only screen and (min-width: 375px) {
+  button.main-buttons {
+    width: 25vw;
+  }
 }

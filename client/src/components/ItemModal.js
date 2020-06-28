@@ -57,10 +57,10 @@ class ItemModal extends Component {
       <div>
         {this.props.isAuthenticated ? (
           <Button
-            className="btn-block p-0 pl-2 text-left"
+            className="main-buttons p-0 pl-2 text-center mx-auto"
             onClick={this.toggle}
           >
-            Add Item
+            Add Other Item
           </Button>
         ) : (
           <h4 className="mb-3 ml-4">Please log in to manage items</h4>
