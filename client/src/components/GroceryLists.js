@@ -48,11 +48,13 @@ class GroceryLists extends Component {
     // console.log("==After typeof");
     return (
       <>
-        <Row className="single-list-header mr-4 h-100">
+        <Row className="h-100 ">
           <Col className="my-auto">
-            <h4 className="text-center text-light m-0">My Grocery Lists</h4>
+            <h4 className="text-center  m-0">My Grocery Lists</h4>
           </Col>
         </Row>
+        <br />
+        <br />
         <br />
         <Container>
           <ListModal />
@@ -81,12 +83,13 @@ class GroceryLists extends Component {
             </TransitionGroup>
           </ListGroup>
         </Container>
-        <Container>
+        <br />
+        <Container fluid>
           <Row>
-            <Col className="text-center">
+            <Col className="text-left pl-0">
               <img
                 className="img-fluid bottom-img"
-                src={process.env.PUBLIC_URL + "/images/people-illustration.png"}
+                src={process.env.PUBLIC_URL + "/images/lady-shopping.png"}
               />
             </Col>
           </Row>

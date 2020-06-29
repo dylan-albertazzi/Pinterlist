@@ -37,11 +37,10 @@ class AppNavbar extends Component {
     const authLinks = (
       <Fragment>
         <NavItem>
-          <span className="navbar-text-color mr-3">
-            <strong>{user ? `Welcome ${user.name}` : ``}</strong>
+          <span className="navbar-text-color mr-3 text-muted">
+            {user ? `Welcome ${user.name}` : ``}
           </span>
         </NavItem>
-
         <Link
           className="navbar-text-color mr-3"
           to={user ? `/lists/${this.props.userId}` : ``}
@@ -51,7 +50,6 @@ class AppNavbar extends Component {
         <Link className="navbar-text-color mr-3" to="/about">
           <NavItem>About</NavItem>
         </Link>
-
         <Logout />
       </Fragment>
     );
@@ -73,7 +71,7 @@ class AppNavbar extends Component {
           light
           collapseOnSelect
           expand="sm"
-          className="mb-5 pt-3 color-nav"
+          className="mb-5 pt-3 color-nav shadow-sm"
         >
           <Container>
             <NavbarBrand href="#">
@@ -81,10 +79,13 @@ class AppNavbar extends Component {
                 src={
                   process.env.PUBLIC_URL + "/images/Pinterlist-logo-main.png"
                 }
-                height="70"
+                height="60"
               />
             </NavbarBrand>
-            <NavbarToggler className="toggle-color" onClick={this.toggle} />
+            <NavbarToggler
+              className="toggle-color border-0 p-1"
+              onClick={this.toggle}
+            />
             <Collapse variant="dark" dark isOpen={this.state.isOpen} navbar>
               <Nav className="ml-auto" navbar>
                 {isAuthenticated ? authLinks : guestLinks}

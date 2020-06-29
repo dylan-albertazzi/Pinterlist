@@ -58,11 +58,11 @@ class ListModal extends Component {
           <Col>
             {this.props.isAuthenticated ? (
               <Button
-                className="main-buttons btn-block p-0 pl-2 text-center mx-auto"
+                className="main-buttons btn-block p-0 text-center mx-auto shadow-sm rounded-pill font-weight-bold"
                 // style={{ marginBottom: "2rem" }}
                 onClick={this.toggle}
               >
-                Add List
+                + List
               </Button>
             ) : (
               <h4 className="mb-3 ml-4">Please log in to manage lists</h4>

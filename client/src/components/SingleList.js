@@ -63,7 +63,7 @@ class SingleList extends Component {
     // console.log("==After typeof");
     return (
       <>
-        <Row className="single-list-header mr-4 h-100">
+        <Row className="single-list-header mr-4 h-100 shadow">
           <Col className="my-auto">
             <h1 className="text-center">{this.props.item.listName}</h1>
           </Col>

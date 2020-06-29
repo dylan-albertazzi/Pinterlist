@@ -4,8 +4,13 @@ h3,
 h4,
 h5,
 a,
+span {
+  font-family: "Spartan", sans-serif;
+  font-weight: 600 !important;
+}
+
 p {
-  font-family: SF-Pro, sans-serif;
+  font-family: "Spartan", sans-serif;
 }
 
 @font-face {
@@ -13,6 +18,12 @@ p {
   font-weight: 400;
   src: url("https://applesocial.s3.amazonaws.com/assets/styles/fonts/sanfrancisco/sanfranciscodisplay-regular-webfont.woff");
 }
+
+/* @font-face {
+  font-family: "Covered-By-Your-Grace", cursive;
+  font-weight: 400;
+  src: url("https://fonts.googleapis.com/css2?family=Covered+By+Your+Grace&display=swap");
+} */
 
 li.list-group-item a {
   color: black;
@@ -111,6 +122,12 @@ div.single-list-header h1 {
 img.bottom-img {
   height: 40vh;
 }
+
+/* Navbar Toggler */
+span.navber-toggler-icon {
+  width: 25px;
+}
+
 @media only screen and (min-width: 375px) {
   button.main-buttons {
     width: 25vw;

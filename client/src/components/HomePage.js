@@ -57,7 +57,7 @@ class HomePage extends Component {
             />
           </Col>
           <Col className="d-flex">
-            <Button className="main-buttons start-btn btn-block mt-auto d-flex align-items-center py-3">
+            <Button className="shadow-sm main-buttons start-btn btn-block mt-auto d-flex align-items-center py-3">
               Start Here
             </Button>
           </Col>

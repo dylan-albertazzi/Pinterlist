@@ -5,6 +5,7 @@ import SingleList from "./components/SingleList";
 import HomePage from "./components/HomePage";
 import ItemModal from "./components/ItemModal";
 import ListModal from "./components/ListModal";
+import AppFooter from "./components/AppFooter";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Container, Row, Col } from "reactstrap";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
@@ -35,6 +36,7 @@ class App extends Component {
                 component={SingleList}
               />
             </Switch>
+            <AppFooter />
           </div>
         </Router>
       </Provider>
