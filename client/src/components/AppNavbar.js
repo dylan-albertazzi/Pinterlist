@@ -38,7 +38,7 @@ class AppNavbar extends Component {
       <Fragment>
         <NavItem>
           <span className="navbar-text-color mr-3 text-muted">
-            {user ? `Welcome ${user.name}` : ``}
+            {user ? `Welcome ${this.props.userName}` : ``}
           </span>
         </NavItem>
         <Link
@@ -56,12 +56,13 @@ class AppNavbar extends Component {
 
     const guestLinks = (
       <Fragment>
-        <NavItem>
-          <RegisterModal />
-        </NavItem>
-        <NavItem>
-          <LoginModal />
-        </NavItem>
+        <Link className="navbar-text-color mr-3" to="/about">
+          <NavItem>About</NavItem>
+        </Link>
+
+        <RegisterModal />
+
+        <LoginModal />
       </Fragment>
     );
 
@@ -74,20 +75,22 @@ class AppNavbar extends Component {
           className="mb-5 pt-3 color-nav shadow-sm"
         >
           <Container>
-            <NavbarBrand href="#">
-              <img
-                src={
-                  process.env.PUBLIC_URL + "/images/Pinterlist-logo-main.png"
-                }
-                height="60"
-              />
+            <NavbarBrand>
+              <Link to="/">
+                <img
+                  src={
+                    process.env.PUBLIC_URL + "/images/Pinterlist-logo-main.png"
+                  }
+                  height="60"
+                />
+              </Link>
             </NavbarBrand>
             <NavbarToggler
               className="toggle-color border-0 p-1"
               onClick={this.toggle}
             />
             <Collapse variant="dark" dark isOpen={this.state.isOpen} navbar>
-              <Nav className="ml-auto" navbar>
+              <Nav className="ml-auto d-flex align-items-center" navbar>
                 {isAuthenticated ? authLinks : guestLinks}
               </Nav>
             </Collapse>
@@ -99,6 +102,7 @@ class AppNavbar extends Component {
 }
 
 const mapStateToProps = (state) => {
+  console.log("==My state:", state);
   if (state.auth.user) {
     return {
       list: state.list,
@@ -106,6 +110,7 @@ const mapStateToProps = (state) => {
       isAuthenticated: state.auth.isAuthenticated,
       userId: state.auth.user._id,
       auth: state.auth,
+      userName: state.auth.user.name,
     };
   } else {
     return {

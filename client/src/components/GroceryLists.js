@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { Component, Fragment } from "react";
 import {
   Container,
   ListGroup,
@@ -42,20 +42,8 @@ class GroceryLists extends Component {
 
   render() {
     const { lists } = this.props.list;
-
-    // console.log("== typeof");
-    // console.log(typeof this.props.userId);
-    // console.log("==After typeof");
-    return (
-      <>
-        <Row className="h-100 ">
-          <Col className="my-auto">
-            <h4 className="text-center  m-0">My Grocery Lists</h4>
-          </Col>
-        </Row>
-        <br />
-        <br />
-        <br />
+    const showLists = (
+      <Fragment>
         <Container>
           <ListModal />
           <ListGroup>
@@ -83,8 +71,8 @@ class GroceryLists extends Component {
             </TransitionGroup>
           </ListGroup>
         </Container>
-        <br />
         <Container fluid>
+          <br />
           <Row>
             <Col className="text-left pl-0">
               <img
@@ -94,6 +82,43 @@ class GroceryLists extends Component {
             </Col>
           </Row>
         </Container>
+      </Fragment>
+    );
+
+    const noLists = (
+      <Fragment>
+        <Container fluid>
+          <ListModal />
+          <Row className="align-items-center mt-5">
+            <Col className="text-center">
+              <img
+                className="img-fluid bottom-img"
+                src={process.env.PUBLIC_URL + "/images/no-lists.svg"}
+              />
+            </Col>
+            <Col>
+              <span>Looks like you need to add a list!</span>
+            </Col>
+          </Row>
+        </Container>
+      </Fragment>
+    );
+    // console.log("== typeof");
+    // console.log(typeof this.props.userId);
+    // console.log("==After typeof");
+    return (
+      <>
+        <Container fluid>
+          <Row className="h-100 ">
+            <Col className="my-auto">
+              <h4 className="text-center  m-0">My Grocery Lists</h4>
+            </Col>
+          </Row>
+          <br />
+          <br />
+        </Container>
+
+        {lists.length > 0 ? showLists : noLists}
       </>
     );
   }

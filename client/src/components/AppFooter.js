@@ -1,10 +1,14 @@
 import React, { Component } from "react";
-import { Container } from "reactstrap";
+import { Container, Row, Col } from "reactstrap";
 class AppFooter extends Component {
   render() {
     return (
-      <Container className="container-fluid mt-auto py-3 bg-dark text-white">
-        <div className="container">Place sticky footer content here.</div>
+      <Container fluid className="bg-green mt-auto py-3 text-white footer">
+        <Row className="text-center">
+          <Col>
+            <p className="h6 m-0">© Pinterlist 2020</p>
+          </Col>
+        </Row>
       </Container>
     );
   }

@@ -60,7 +60,7 @@ class ItemModal extends Component {
             className="main-buttons p-0 pl-2 text-center mx-auto shadow-sm rounded-pill"
             onClick={this.toggle}
           >
-            Add Other Item
+            + ITEM
           </Button>
         ) : (
           <h4 className="mb-3 ml-4">Please log in to manage items</h4>
@@ -73,6 +73,7 @@ class ItemModal extends Component {
               <FormGroup>
                 <Label for="ingredientName">Name</Label>
                 <Input
+                  className="rounded-pill"
                   type="text"
                   name="ingredientName"
                   id="ingredientName"
@@ -80,14 +81,20 @@ class ItemModal extends Component {
                   onChange={this.onChange}
                 ></Input>
                 <Label for="quantity">Quantity</Label>
-                <Input
+                {/* <Input
+                  className="rounded-pill"
                   type="number"
                   name="quantity"
                   id="quantity"
                   placeholder="Quantity"
                   onChange={this.onChange}
-                ></Input>
-                <Button color="dark" style={{ marginTop: "2rem" }} block>
+                ></Input> */}
+                <Button
+                  className="main-buttons text-center p-0 pl-2 mb-2 mx-auto shadow-sm rounded-pill"
+                  color="dark"
+                  style={{ marginTop: "2rem" }}
+                  block
+                >
                   Add Item
                 </Button>
               </FormGroup>

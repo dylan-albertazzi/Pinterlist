@@ -61,7 +61,7 @@ class AddPinModal extends Component {
             className="main-buttons text-center p-0 pl-2 mb-2 mx-auto shadow-sm rounded-pill"
             onClick={this.toggle}
           >
-            Add Pinterest Recipe
+            + PINTEREST RECIPE
           </Button>
         ) : (
           <h4 className="mb-3 ml-4">Please log in to manage items</h4>
@@ -76,6 +76,7 @@ class AddPinModal extends Component {
               <FormGroup>
                 <Label for="pinURL">Pinterest URL</Label>
                 <Input
+                  className="rounded-pill"
                   type="url"
                   name="pinURL"
                   id="pinURL"
@@ -83,7 +84,12 @@ class AddPinModal extends Component {
                   onChange={this.onChange}
                 ></Input>
 
-                <Button color="dark" style={{ marginTop: "2rem" }} block>
+                <Button
+                  className="main-buttons text-center p-0 pl-2 mb-2 mx-auto shadow-sm rounded-pill"
+                  color="dark"
+                  style={{ marginTop: "2rem" }}
+                  block
+                >
                   Add Pin
                 </Button>
               </FormGroup>

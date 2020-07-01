@@ -43,58 +43,69 @@ class HomePage extends Component {
 
     return (
       <>
-        <Jumbotron className="bg-transparent">
-          <h5>
-            Stop wasting time finding the ingredients you need from Pinterest
-            recipes!
-          </h5>
-        </Jumbotron>
-        <Row className="h-100 px-3">
-          <Col className="my-auto">
-            <img
-              className="img-fluid bottom-img"
-              src={process.env.PUBLIC_URL + "/images/sad-woman.png"}
-            />
-          </Col>
-          <Col className="d-flex">
-            <Button className="shadow-sm main-buttons start-btn btn-block mt-auto d-flex align-items-center py-3">
-              Start Here
-            </Button>
-          </Col>
-        </Row>
-        <br />
-        <Container>
-          <ListGroup>
-            <TransitionGroup className="grocery-list">
-              {lists.map(({ _id, listName }) => (
-                <CSSTransition key={_id} timeout={500} classNames="fade">
-                  <ListGroupItem className="d-flex justify-content-between p-2">
-                    <Link
-                      className="align-content-center"
-                      to={`/list/${this.props.userId}/${_id}`}
-                    >
-                      {" "}
-                      {listName}{" "}
-                    </Link>
-                    <Link
-                      className="remove-btn btn-toolbar align-content-center"
-                      size="sm"
-                      onClick={this.onDeleteClick.bind(this, _id)}
-                    >
-                      <i class="fa fa-trash-o"></i>
-                    </Link>
-                  </ListGroupItem>
-                </CSSTransition>
-              ))}
-            </TransitionGroup>
-          </ListGroup>
+        <Container fluid>
+          <Jumbotron className="bg-transparent text-center mb-0">
+            <h5>
+              Stop wasting time finding the ingredients you need from Pinterest
+              recipes!
+            </h5>
+          </Jumbotron>
+          <Row className="h-100 px-3">
+            <Col md={6} className="my-auto">
+              <img
+                className="img-fluid bottom-img"
+                src={process.env.PUBLIC_URL + "/images/checking-list.svg"}
+              />
+            </Col>
+            <Col className="d-flex justify-content-center pt-4">
+              <Button className="shadow-sm main-buttons start-btn btn-block mt-auto d-flex align-items-center py-3 justify-content-center">
+                START HERE
+              </Button>
+            </Col>
+          </Row>
         </Container>
         <Container>
-          <Row>
+          <Row className="mt-5 d-flex align-items-center">
+            <Col className="text-left my-5 ">
+              <h5>One Click</h5>
+
+              <p>Turn a Pinterest Recipe into a Grocery List</p>
+            </Col>
+            <Col md={6} className="my-auto">
+              <img
+                className="img-fluid bottom-img"
+                src={process.env.PUBLIC_URL + "/images/pin-to-list.svg"}
+              />
+            </Col>
+          </Row>
+        </Container>
+        <Container>
+          <Row className="mt-5">
+            <Col className="text-left my-5">
+              <h5>How it works</h5>
+              <p>
+                Say which pins you want the ingredients for and Rapido
+                thoughtfully reads the essay long story leading up to the recipe
+                AND returns the ingredients you need to buy! All for absolutely
+                no cost!
+              </p>
+            </Col>
+          </Row>
+        </Container>
+
+        <Container>
+          <Row className="my-3">
+            <Col className="d-flex justify-content-center pt-4">
+              <Button className="shadow-sm main-buttons start-btn btn-block mt-auto d-flex align-items-center py-3 justify-content-center">
+                TRY IT OUT
+              </Button>
+            </Col>
+          </Row>
+          <Row className="my-5">
             <Col className="text-center">
               <img
                 className="img-fluid bottom-img"
-                src={process.env.PUBLIC_URL + "/images/people-illustration.png"}
+                src={process.env.PUBLIC_URL + "/images/accomplished-woman.svg"}
               />
             </Col>
           </Row>

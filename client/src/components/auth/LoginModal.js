@@ -83,7 +83,7 @@ class LoginModal extends Component {
 
   render() {
     return (
-      <div>
+      <>
         <Link className="navbar-text-color mr-3" onClick={this.toggle} href="#">
           <NavItem>Login</NavItem>
         </Link>
@@ -122,7 +122,7 @@ class LoginModal extends Component {
             </Form>
           </ModalBody>
         </Modal>
-      </div>
+      </>
     );
   }
 }

@@ -79,13 +79,19 @@ class ListModal extends Component {
               <FormGroup>
                 <Label for="listName">List</Label>
                 <Input
+                  className="rounded-pill"
                   type="text"
                   name="listName"
                   id="list"
                   placeholder="Add shopping list"
                   onChange={this.onChange}
                 ></Input>
-                <Button color="dark" style={{ marginTop: "2rem" }} block>
+                <Button
+                  className="main-buttons text-center p-0 pl-2 mb-2 mx-auto shadow-sm rounded-pill"
+                  color="dark"
+                  style={{ marginTop: "2rem" }}
+                  block
+                >
                   Add List
                 </Button>
               </FormGroup>
