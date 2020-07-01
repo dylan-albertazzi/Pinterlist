@@ -32,6 +32,12 @@ class SingleList extends Component {
     }
   }
 
+  // componentWillReceiveProps(nextProps) {
+  //   if (this.props.userId !== nextProps.userId) {
+  //     nextProps.getItems(nextProps.userId, nextProps.match.params.listid);
+  //   }
+  // }
+
   componentDidMount() {
     this.props.getItems(this.props.userId, this.props.match.params.listid);
   }

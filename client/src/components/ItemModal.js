@@ -80,7 +80,7 @@ class ItemModal extends Component {
                   placeholder="Add item"
                   onChange={this.onChange}
                 ></Input>
-                <Label for="quantity">Quantity</Label>
+                {/* <Label for="quantity">Quantity</Label> */}
                 {/* <Input
                   className="rounded-pill"
                   type="number"

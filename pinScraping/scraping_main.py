@@ -15,6 +15,12 @@ def make_recipe_list(url):
 
     soup = BeautifulSoup(source, 'lxml')
 
+    # Check for schema
+    
+    #look for element w itemscope itmetype="https://schema.org/Recipe"
+
+        #within that look for itemProp ="recipeIngredient"
+
 
 
     lists = soup.select('body ul')

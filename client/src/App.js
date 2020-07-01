@@ -24,7 +24,7 @@ class App extends Component {
     return (
       <Provider store={store}>
         <Router>
-          <div className="App">
+          <div className="App d-flex flex-column min-vh-100">
             <AppNavbar />
 
             <Switch>
