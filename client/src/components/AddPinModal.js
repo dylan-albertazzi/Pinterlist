@@ -36,6 +36,14 @@ class AddPinModal extends Component {
     console.log("==targ name:", e.target.name);
   };
 
+  fromPinterest = (url) => {
+    if (url.includes("www.pinterest.com")) {
+      return true;
+    } else {
+      return false;
+    }
+  };
+
   onSubmit = (e) => {
     e.preventDefault();
     console.log("state n props: ");
@@ -45,12 +53,19 @@ class AddPinModal extends Component {
     //   ingredientName: this.state.ingredientName,
     //   quantity: this.state.quantity,
     // };
+    if (this.fromPinterest(this.state.pinURL)) {
+      //Add pin via addPin action
+      this.props.addPin(
+        this.props.userid,
+        this.props.listid,
+        this.state.pinURL
+      );
 
-    //Add pin via addPin action
-    this.props.addPin(this.props.userid, this.props.listid, this.state.pinURL);
-
-    //close modal
-    this.toggle();
+      //close modal
+      this.toggle();
+    } else {
+      document.getElementById("errorMsg").classList.toggle("invisible");
+    }
   };
 
   render() {
@@ -83,6 +98,9 @@ class AddPinModal extends Component {
                   placeholder="Add item"
                   onChange={this.onChange}
                 ></Input>
+                <small id="errorMsg" className="alert-danger ml-1 invisible">
+                  Whoops! Make sure the url is from Pinterest.
+                </small>
 
                 <Button
                   className="main-buttons text-center p-0 pl-2 mb-2 mx-auto shadow-sm rounded-pill"
