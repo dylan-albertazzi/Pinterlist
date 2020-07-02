@@ -93,5 +93,5 @@ def make_recipe_list(url):
 
 
 
-# make_recipe_list(sys.argv[1])
-make_recipe_list("https://www.pinterest.com/pin/AUKKRTuUvRP50rClh3mU_8eYZsn7AQDZyKEvkpmwGF87hqa30r9jX_M/")
+make_recipe_list(sys.argv[1])
+# make_recipe_list("https://www.pinterest.com/pin/AUKKRTuUvRP50rClh3mU_8eYZsn7AQDZyKEvkpmwGF87hqa30r9jX_M/")

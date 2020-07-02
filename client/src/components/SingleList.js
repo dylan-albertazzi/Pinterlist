@@ -13,6 +13,7 @@ import { getItems, deleteItem } from "../actions/itemActions";
 import PropTypes from "prop-types";
 import ItemModal from "./ItemModal";
 import AddPinModal from "./AddPinModal";
+import ErrorMessage from "./ErrorMessage";
 import { Link } from "react-router-dom";
 
 class SingleList extends Component {
@@ -131,6 +132,7 @@ class SingleList extends Component {
     // console.log("==After typeof");
     return (
       <>
+        <ErrorMessage error={this.props.error} />
         <Container fluid>
           <Row className="h-100 ">
             <Col className="my-auto">
@@ -182,6 +184,7 @@ const mapStateToProps = (state) => {
       list: state.list,
       item: state.item, //item is the name of our reducer
       isAuthenticated: state.auth.isAuthenticated,
+      error: state.error,
     };
   }
 };

@@ -36,6 +36,7 @@ class AddPinModal extends Component {
     console.log("==targ name:", e.target.name);
   };
 
+  //Function to make sure url is from pinterest
   fromPinterest = (url) => {
     if (url.includes("www.pinterest.com")) {
       return true;
@@ -49,10 +50,8 @@ class AddPinModal extends Component {
     console.log("state n props: ");
     console.log(this.state);
     console.log(this.props);
-    // const newItem = {
-    //   ingredientName: this.state.ingredientName,
-    //   quantity: this.state.quantity,
-    // };
+
+    //validate user input. Make sure it's from Pinterest.com
     if (this.fromPinterest(this.state.pinURL)) {
       //Add pin via addPin action
       this.props.addPin(
@@ -60,7 +59,6 @@ class AddPinModal extends Component {
         this.props.listid,
         this.state.pinURL
       );
-
       //close modal
       this.toggle();
     } else {
