@@ -1,22 +1,139 @@
+html,
+h1,
+h2,
+h3,
+h4,
+h5,
+a,
+span {
+  font-family: "Spartan", sans-serif;
+  font-weight: 600 !important;
+}
+
+p {
+  font-family: "Spartan", sans-serif;
+}
+
+@font-face {
+  font-family: "SF-Pro";
+  font-weight: 400;
+  src: url("https://applesocial.s3.amazonaws.com/assets/styles/fonts/sanfrancisco/sanfranciscodisplay-regular-webfont.woff");
+}
+
+.bg-green {
+  background-color: #22d596;
+}
+/* @font-face {
+  font-family: "Covered-By-Your-Grace", cursive;
+  font-weight: 400;
+  src: url("https://fonts.googleapis.com/css2?family=Covered+By+Your+Grace&display=swap");
+} */
+
+li.list-group-item a {
+  color: black;
+}
+li.list-group-item a:hover {
+  color: #22d596;
+  text-decoration: none;
+}
+
 .remove-btn {
-    margin-right: 0.5rem;
+  margin-right: 0.5rem;
 }
 
 .fade-enter {
-    opacity: 0.01;
+  opacity: 0.01;
 }
 
 .fade-enter-active {
- opacity: 1;
- transition: opacity 1000ms ease-in;
+  opacity: 1;
+  transition: opacity 1000ms ease-in;
 }
 
 .fade-exit {
- opacity: 1;
-
+  opacity: 1;
 }
 
 .fade-exit-active {
- opacity: 0.01;
- transition: opacity 1000ms ease-in;
+  opacity: 0.01;
+  transition: opacity 1000ms ease-in;
+}
+
+.color-nav {
+  background-color: white;
+}
+
+.navbar-text-color {
+  color: black;
+}
+.navbar-text-color:hover {
+  color: #22d596;
+  text-decoration: none;
+}
+
+.toggle-color {
+  color: black;
+}
+
+button.toggle-color.navbar-toggler {
+  border-color: black;
+}
+
+button.toggle-color.navbar-toggler:visited {
+  border-color: black;
+}
+
+button.toggle-color span.navbar-toggler-icon {
+  background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 32 32' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='rgba(0, 0, 0, 1)' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 8h24M4 16h24M4 24h24'/%3E%3C/svg%3E");
+}
+
+/* List Styling */
+li.list-group-item {
+  border-width: 2px;
+  border-left-width: 0;
+  border-right-width: 0;
+}
+
+/* Add list button styling */
+button.btn {
+  margin-bottom: 2rem;
+  background-color: #22d596;
+  border-color: #22d596;
+}
+button.main-buttons {
+  width: 75vw;
+  height: 6vh;
+}
+
+div.single-list-header {
+  background-color: #22d596;
+  border-bottom-right-radius: 20px;
+  border-top-right-radius: 20px;
+  min-height: 20vh;
+}
+
+button.start-btn {
+  border-bottom-right-radius: 20px;
+  border-top-left-radius: 20px;
+  border-top-right-radius: 0px;
+  border-bottom-left-radius: 0px;
+}
+
+div.single-list-header h1 {
+  color: white;
+}
+
+img.bottom-img {
+  height: 40vh;
+}
+
+/* Navbar Toggler */
+span.navber-toggler-icon {
+  width: 25px;
+}
+
+@media only screen and (min-width: 375px) {
+  button.main-buttons {
+    width: 25vw;
+  }
 }

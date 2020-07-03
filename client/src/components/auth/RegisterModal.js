@@ -9,6 +9,7 @@ import {
   Label,
   Input,
   NavLink,
+  NavItem,
   Alert,
 } from "reactstrap";
 
@@ -17,6 +18,7 @@ import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import { register } from "../../actions/authActions";
 import { clearErrors } from "../../actions/errorActions";
+import { Link } from "react-router-dom";
 
 class RegisterModal extends Component {
   state = {
@@ -84,10 +86,13 @@ class RegisterModal extends Component {
 
   render() {
     return (
-      <div>
-        <NavLink onClick={this.toggle} href="#">
+      <>
+        <Link className="navbar-text-color mr-3" onClick={this.toggle} href="#">
+          <NavItem>Register</NavItem>
+        </Link>
+        {/* <NavLink onClick={this.toggle} href="#">
           Register
-        </NavLink>
+        </NavLink> */}
 
         <Modal isOpen={this.state.modal} toggle={this.toggle}>
           <ModalHeader toggle={this.toggle}>Register</ModalHeader>
@@ -133,7 +138,7 @@ class RegisterModal extends Component {
             </Form>
           </ModalBody>
         </Modal>
-      </div>
+      </>
     );
   }
 }

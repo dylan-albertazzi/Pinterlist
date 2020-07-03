@@ -1,9 +1,14 @@
 import React, { Component } from "react";
 import AppNavbar from "./components/AppNavbar";
-import GroceryList from "./components/GroceryList";
+import GroceryLists from "./components/GroceryLists";
+import SingleList from "./components/SingleList";
+import HomePage from "./components/HomePage";
 import ItemModal from "./components/ItemModal";
+import ListModal from "./components/ListModal";
+import AppFooter from "./components/AppFooter";
 import "bootstrap/dist/css/bootstrap.min.css";
-import { Container } from "reactstrap";
+import { Container, Row, Col } from "reactstrap";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
 import { Provider } from "react-redux";
 import store from "./store";
@@ -18,13 +23,22 @@ class App extends Component {
   render() {
     return (
       <Provider store={store}>
-        <div className="App">
-          <AppNavbar />
-          <Container>
-            <ItemModal />
-            <GroceryList />
-          </Container>
-        </div>
+        <Router>
+          <div className="App d-flex flex-column min-vh-100">
+            <AppNavbar />
+
+            <Switch>
+              <Route path="/" exact component={HomePage} />
+              <Route path="/lists/:userid" exact component={GroceryLists} />
+              <Route
+                path="/list/:userid/:listid"
+                exact
+                component={SingleList}
+              />
+            </Switch>
+            <AppFooter />
+          </div>
+        </Router>
       </Provider>
     );
   }

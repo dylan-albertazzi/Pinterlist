@@ -9,6 +9,7 @@ import {
   Label,
   Input,
   NavLink,
+  NavItem,
   Alert,
 } from "reactstrap";
 
@@ -17,6 +18,7 @@ import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import { login } from "../../actions/authActions";
 import { clearErrors } from "../../actions/errorActions";
+import { Link } from "react-router-dom";
 
 class LoginModal extends Component {
   state = {
@@ -81,10 +83,10 @@ class LoginModal extends Component {
 
   render() {
     return (
-      <div>
-        <NavLink onClick={this.toggle} href="#">
-          Login
-        </NavLink>
+      <>
+        <Link className="navbar-text-color mr-3" onClick={this.toggle} href="#">
+          <NavItem>Login</NavItem>
+        </Link>
 
         <Modal isOpen={this.state.modal} toggle={this.toggle}>
           <ModalHeader toggle={this.toggle}>Login</ModalHeader>
@@ -120,7 +122,7 @@ class LoginModal extends Component {
             </Form>
           </ModalBody>
         </Modal>
-      </div>
+      </>
     );
   }
 }

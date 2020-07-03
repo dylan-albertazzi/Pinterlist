@@ -1,4 +1,4 @@
-import React, { Component, Fragment } from "react";
+import React, { Component, Fragment, useState } from "react";
 import {
   Collapse,
   Navbar,
@@ -14,7 +14,8 @@ import PropTypes from "prop-types";
 import RegisterModal from "./auth/RegisterModal";
 import Logout from "./auth/Logout";
 import LoginModal from "./auth/LoginModal";
-
+import { Link } from "react-router-dom";
+import "../App.css";
 class AppNavbar extends Component {
   state = {
     isOpen: false,
@@ -36,35 +37,60 @@ class AppNavbar extends Component {
     const authLinks = (
       <Fragment>
         <NavItem>
-          <span className="navbar-text mr-3">
-            <strong>{user ? `Welcome ${user.name}` : ``}</strong>
+          <span className="navbar-text-color mr-3 text-muted">
+            {user ? `Welcome ${this.props.userName}` : ``}
           </span>
         </NavItem>
-        <NavItem>
-          <Logout />
-        </NavItem>
+        <Link
+          className="navbar-text-color mr-3"
+          to={user ? `/lists/${this.props.userId}` : ``}
+        >
+          <NavItem>Grocery Lists</NavItem>
+        </Link>
+        <Link className="navbar-text-color mr-3" to="/about">
+          <NavItem>About</NavItem>
+        </Link>
+        <Logout />
       </Fragment>
     );
 
     const guestLinks = (
       <Fragment>
-        <NavItem>
-          <RegisterModal />
-        </NavItem>
-        <NavItem>
-          <LoginModal />
-        </NavItem>
+        <Link className="navbar-text-color mr-3" to="/about">
+          <NavItem>About</NavItem>
+        </Link>
+
+        <RegisterModal />
+
+        <LoginModal />
       </Fragment>
     );
 
     return (
       <div>
-        <Navbar color="dark" dark expand="sm" className="mb-5">
+        <Navbar
+          light
+          collapseOnSelect
+          expand="sm"
+          className="mb-5 pt-3 color-nav shadow-sm"
+        >
           <Container>
-            <NavbarBrand href="/">Pinterlist</NavbarBrand>
-            <NavbarToggler onClick={this.toggle} />
-            <Collapse isOpen={this.state.isOpen} navbar>
-              <Nav className="ml-auto" navbar>
+            <NavbarBrand>
+              <Link to="/">
+                <img
+                  src={
+                    process.env.PUBLIC_URL + "/images/Pinterlist-logo-main.png"
+                  }
+                  height="60"
+                />
+              </Link>
+            </NavbarBrand>
+            <NavbarToggler
+              className="toggle-color border-0 p-1"
+              onClick={this.toggle}
+            />
+            <Collapse variant="dark" dark isOpen={this.state.isOpen} navbar>
+              <Nav className="ml-auto d-flex align-items-center" navbar>
                 {isAuthenticated ? authLinks : guestLinks}
               </Nav>
             </Collapse>
@@ -75,8 +101,25 @@ class AppNavbar extends Component {
   }
 }
 
-const mapStateToProps = (state) => ({
-  auth: state.auth,
-});
+const mapStateToProps = (state) => {
+  console.log("==My state:", state);
+  if (state.auth.user) {
+    return {
+      list: state.list,
+      item: state.item, //item is the name of our reducer
+      isAuthenticated: state.auth.isAuthenticated,
+      userId: state.auth.user._id,
+      auth: state.auth,
+      userName: state.auth.user.name,
+    };
+  } else {
+    return {
+      list: state.list,
+      item: state.item, //item is the name of our reducer
+      isAuthenticated: state.auth.isAuthenticated,
+      auth: state.auth,
+    };
+  }
+};
 
 export default connect(mapStateToProps, null)(AppNavbar);
