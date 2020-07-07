@@ -94,6 +94,9 @@ li.list-group-item {
   border-right-width: 0;
 }
 
+li.nav-item {
+  font-size: smaller;
+}
 /* Add list button styling */
 button.btn {
   margin-bottom: 2rem;
@@ -132,8 +135,8 @@ span.navber-toggler-icon {
   width: 25px;
 }
 
-@media only screen and (min-width: 375px) {
+@media only screen and (min-width: 415px) {
   button.main-buttons {
-    width: 25vw;
+    width: 30vw;
   }
 }

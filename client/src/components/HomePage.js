@@ -40,15 +40,15 @@ class HomePage extends Component {
 
   render() {
     const { lists } = this.props.list;
-
+    const { user } = this.props.auth;
     return (
       <>
         <Container fluid>
           <Jumbotron className="bg-transparent text-center mb-0">
-            <h5>
+            <h4>
               Stop wasting time finding the ingredients you need from Pinterest
               recipes!
-            </h5>
+            </h4>
           </Jumbotron>
           <Row className="h-100 px-3">
             <Col md={6} className="my-auto">
@@ -57,10 +57,13 @@ class HomePage extends Component {
                 src={process.env.PUBLIC_URL + "/images/checking-list.svg"}
               />
             </Col>
-            <Col className="d-flex justify-content-center pt-4">
-              <Button className="shadow-sm main-buttons start-btn btn-block mt-auto d-flex align-items-center py-3 justify-content-center">
-                START HERE
+            <Col className="d-flex justify-content-center">
+              
+              <Button  className="shadow-sm main-buttons start-btn btn-block my-auto d-flex align-items-center py-3 justify-content-center">
+              <Link className="text-light" to={user ? `/lists/${this.props.userId}` : ``}>START HERE</Link>
               </Button>
+              
+              
             </Col>
           </Row>
         </Container>
@@ -84,7 +87,7 @@ class HomePage extends Component {
             <Col className="text-left my-5">
               <h5>How it works</h5>
               <p>
-                Say which pins you want the ingredients for and Rapido
+                Say which pins you want the ingredients for and Pinterlist
                 thoughtfully reads the essay long story leading up to the recipe
                 AND returns the ingredients you need to buy! All for absolutely
                 no cost!
@@ -123,12 +126,14 @@ const mapStateToProps = (state) => {
       item: state.item, //item is the name of our reducer
       isAuthenticated: state.auth.isAuthenticated,
       userId: state.auth.user._id,
+      auth: state.auth,
     };
   } else {
     return {
       list: state.list,
       item: state.item, //item is the name of our reducer
       isAuthenticated: state.auth.isAuthenticated,
+      auth: state.auth,
     };
   }
 };
