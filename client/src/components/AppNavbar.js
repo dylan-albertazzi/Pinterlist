@@ -1,4 +1,4 @@
-import React, { Component, Fragment, useState } from "react";
+import React, { Component, Fragment } from "react";
 import {
   Collapse,
   Navbar,
@@ -6,7 +6,6 @@ import {
   NavbarBrand,
   Nav,
   NavItem,
-  NavLink,
   Container,
 } from "reactstrap";
 import { connect } from "react-redux";
@@ -33,17 +32,20 @@ class AppNavbar extends Component {
 
   render() {
     const { isAuthenticated, user } = this.props.auth;
+    if (this.props.auth.user) {
+      console.log("==this.props.auth.user.name", this.props.auth.user.name);
+    }
 
     const authLinks = (
       <Fragment>
         <NavItem>
           <span className="navbar-text-color mr-3 text-muted">
-            {user ? `Welcome ${this.props.userName}` : ``}
+            {this.props.auth.user ? `Welcome ${this.props.auth.user.name}` : ``}
           </span>
         </NavItem>
         <Link
           className="navbar-text-color mr-3"
-          to={user ? `/lists/${this.props.userId}` : ``}
+          to={this.props.auth.user ? `/lists/${this.props.auth.user.id}` : ``}
         >
           <NavItem>Grocery Lists</NavItem>
         </Link>
@@ -114,8 +116,6 @@ const mapStateToProps = (state) => {
     };
   } else {
     return {
-      list: state.list,
-      item: state.item, //item is the name of our reducer
       isAuthenticated: state.auth.isAuthenticated,
       auth: state.auth,
     };

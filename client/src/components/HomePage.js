@@ -1,18 +1,8 @@
 import React, { Component } from "react";
-import {
-  Container,
-  ListGroup,
-  ListGroupItem,
-  Button,
-  Row,
-  Col,
-  Jumbotron,
-} from "reactstrap";
-import { CSSTransition, TransitionGroup } from "react-transition-group";
+import { Container, Button, Row, Col, Jumbotron } from "reactstrap";
 import { connect } from "react-redux";
 
 import PropTypes from "prop-types";
-import ListModal from "./ListModal";
 import { Link } from "react-router-dom";
 
 class HomePage extends Component {
@@ -24,12 +14,6 @@ class HomePage extends Component {
     userId: PropTypes.object,
   };
 
-  componentDidUpdate(prevProps) {
-    // if (this.props.userId !== prevProps.userId) {
-    //   this.props.getLists(this.props.userId);
-    // }
-  }
-
   componentDidMount() {}
 
   onDeleteClick = (id) => {
@@ -39,7 +23,6 @@ class HomePage extends Component {
   };
 
   render() {
-    const { lists } = this.props.list;
     const { user } = this.props.auth;
     return (
       <>
@@ -58,12 +41,18 @@ class HomePage extends Component {
               />
             </Col>
             <Col className="d-flex justify-content-center">
-              
-              <Button  className="shadow-sm main-buttons start-btn btn-block my-auto d-flex align-items-center py-3 justify-content-center">
-              <Link className="text-light" to={user ? `/lists/${this.props.userId}` : ``}>START HERE</Link>
+              <Button className="shadow-sm main-buttons start-btn btn-block my-auto d-flex align-items-center py-3 justify-content-center">
+                <Link
+                  className="text-light"
+                  to={
+                    this.props.auth.user
+                      ? `/lists/${this.props.auth.user.id}`
+                      : `/register`
+                  }
+                >
+                  START HERE
+                </Link>
               </Button>
-              
-              
             </Col>
           </Row>
         </Container>

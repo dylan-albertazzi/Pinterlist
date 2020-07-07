@@ -1,12 +1,9 @@
 import React, { Fragment, Component } from "react";
 import { connect } from "react-redux";
 import {
-  Button,
   Modal,
   ModalHeader,
   ModalBody,
-  Form,
-  FormGroup,
 } from "reactstrap";
 import { clearErrors } from "../actions/errorActions";
 
@@ -30,7 +27,7 @@ class ErrorMessage extends Component {
   render() {
     return (
       <Fragment>
-        {this.props.error.status == 204 && (
+        {this.props.error.status === 204 && (
           <Modal isOpen={this.state.modal} toggle={this.toggle}>
             <ModalHeader toggle={this.toggle}>Error</ModalHeader>
             <ModalBody>

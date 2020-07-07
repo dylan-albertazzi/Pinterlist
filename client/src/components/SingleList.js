@@ -3,7 +3,6 @@ import {
   Container,
   ListGroup,
   ListGroupItem,
-  Button,
   Row,
   Col,
 } from "reactstrap";
@@ -27,8 +26,9 @@ class SingleList extends Component {
 
   componentDidUpdate(prevProps) {
     console.log("==items length:", this.props.item.items.length);
-
-    if (this.props.userId !== prevProps.userId) {
+    console.log("== in state:", this.state)
+    if ((this.props.userId !== prevProps.userId) || (this.props.item.items.length !== prevProps.item.items.length)){
+      
       this.props.getItems(this.props.userId, this.props.match.params.listid);
     }
   }

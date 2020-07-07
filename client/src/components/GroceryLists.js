@@ -3,7 +3,6 @@ import {
   Container,
   ListGroup,
   ListGroupItem,
-  Button,
   Row,
   Col,
 } from "reactstrap";
@@ -24,7 +23,8 @@ class GroceryLists extends Component {
     userId: PropTypes.object,
   };
 
-  componentDidUpdate(prevProps) {
+  componentDidUpdate(prevProps, state) {
+    console.log("this is state",state)
     if (this.props.userId !== prevProps.userId) {
       this.props.getLists(this.props.userId);
     }

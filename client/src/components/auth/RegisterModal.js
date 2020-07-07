@@ -8,7 +8,6 @@ import {
   FormGroup,
   Label,
   Input,
-  NavLink,
   NavItem,
   Alert,
 } from "reactstrap";
@@ -18,7 +17,7 @@ import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import { register } from "../../actions/authActions";
 import { clearErrors } from "../../actions/errorActions";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 
 class RegisterModal extends Component {
   state = {
@@ -29,6 +28,16 @@ class RegisterModal extends Component {
     msg: null,
   };
 
+  //toggle the register modal if the user is coming from the start here button
+  componentDidMount(){
+    if(this.props.location){
+      if(this.props.location.pathname === "/register"){
+        this.toggle();
+      }
+      
+    }
+   
+  }
   componentDidUpdate(prevProps) {
     const { error, isAuthenticated } = this.props;
     if (error !== prevProps.error) {
@@ -87,7 +96,7 @@ class RegisterModal extends Component {
   render() {
     return (
       <>
-        <Link className="navbar-text-color mr-3" onClick={this.toggle} href="#">
+        <Link className="navbar-text-color mr-3" id="register-modal" onClick={this.toggle} href="#">
           <NavItem>Register</NavItem>
         </Link>
         {/* <NavLink onClick={this.toggle} href="#">
