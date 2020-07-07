@@ -15,8 +15,8 @@ import {
 //Container - a component that is hooked to redux
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
-import { login } from "../../actions/authActions";
-import { clearErrors } from "../../actions/errorActions";
+import { login } from "../actions/authActions";
+import { clearErrors } from "../actions/errorActions";
 import { Link } from "react-router-dom";
 
 class LoginModal extends Component {
@@ -83,7 +83,7 @@ class LoginModal extends Component {
   render() {
     return (
       <>
-        <Link className="navbar-text-color mr-3" onClick={this.toggle} href="#">
+        <Link className="text-light list-unstyled" onClick={this.toggle}>
           <NavItem>Login</NavItem>
         </Link>
 

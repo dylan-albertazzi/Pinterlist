@@ -3,11 +3,9 @@ import AppNavbar from "./components/AppNavbar";
 import GroceryLists from "./components/GroceryLists";
 import SingleList from "./components/SingleList";
 import HomePage from "./components/HomePage";
-import ItemModal from "./components/ItemModal";
-import ListModal from "./components/ListModal";
+import RegisterOrLogin from "./components/RegisterOrLogin";
 import AppFooter from "./components/AppFooter";
 import "bootstrap/dist/css/bootstrap.min.css";
-import { Container, Row, Col } from "reactstrap";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
 import { Provider } from "react-redux";
@@ -34,6 +32,12 @@ class App extends Component {
                 path="/list/:userid/:listid"
                 exact
                 component={SingleList}
+              />
+              <Route
+                path="/register"
+                exact
+                component={RegisterOrLogin}
+
               />
             </Switch>
             <AppFooter />

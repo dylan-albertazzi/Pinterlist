@@ -1,18 +1,8 @@
 import React, { Component } from "react";
-import {
-  Container,
-  ListGroup,
-  ListGroupItem,
-  Button,
-  Row,
-  Col,
-  Jumbotron,
-} from "reactstrap";
-import { CSSTransition, TransitionGroup } from "react-transition-group";
+import { Container, Button, Row, Col, Jumbotron } from "reactstrap";
 import { connect } from "react-redux";
 
 import PropTypes from "prop-types";
-import ListModal from "./ListModal";
 import { Link } from "react-router-dom";
 
 class HomePage extends Component {
@@ -24,12 +14,6 @@ class HomePage extends Component {
     userId: PropTypes.object,
   };
 
-  componentDidUpdate(prevProps) {
-    // if (this.props.userId !== prevProps.userId) {
-    //   this.props.getLists(this.props.userId);
-    // }
-  }
-
   componentDidMount() {}
 
   onDeleteClick = (id) => {
@@ -39,16 +23,15 @@ class HomePage extends Component {
   };
 
   render() {
-    const { lists } = this.props.list;
-
+    const { user } = this.props.auth;
     return (
       <>
         <Container fluid>
           <Jumbotron className="bg-transparent text-center mb-0">
-            <h5>
+            <h4>
               Stop wasting time finding the ingredients you need from Pinterest
               recipes!
-            </h5>
+            </h4>
           </Jumbotron>
           <Row className="h-100 px-3">
             <Col md={6} className="my-auto">
@@ -57,9 +40,18 @@ class HomePage extends Component {
                 src={process.env.PUBLIC_URL + "/images/checking-list.svg"}
               />
             </Col>
-            <Col className="d-flex justify-content-center pt-4">
-              <Button className="shadow-sm main-buttons start-btn btn-block mt-auto d-flex align-items-center py-3 justify-content-center">
-                START HERE
+            <Col className="d-flex justify-content-center">
+              <Button className="shadow-sm main-buttons start-btn btn-block my-auto d-flex align-items-center py-3 justify-content-center">
+                <Link
+                  className="text-light"
+                  to={
+                    this.props.auth.user
+                      ? `/lists/${this.props.auth.user.id}`
+                      : `/register`
+                  }
+                >
+                  START HERE
+                </Link>
               </Button>
             </Col>
           </Row>
@@ -84,7 +76,7 @@ class HomePage extends Component {
             <Col className="text-left my-5">
               <h5>How it works</h5>
               <p>
-                Say which pins you want the ingredients for and Rapido
+                Say which pins you want the ingredients for and Pinterlist
                 thoughtfully reads the essay long story leading up to the recipe
                 AND returns the ingredients you need to buy! All for absolutely
                 no cost!
@@ -96,8 +88,17 @@ class HomePage extends Component {
         <Container>
           <Row className="my-3">
             <Col className="d-flex justify-content-center pt-4">
-              <Button className="shadow-sm main-buttons start-btn btn-block mt-auto d-flex align-items-center py-3 justify-content-center">
-                TRY IT OUT
+              <Button className="shadow-sm main-buttons start-btn btn-block my-auto d-flex align-items-center py-3 justify-content-center">
+                <Link
+                  className="text-light"
+                  to={
+                    this.props.auth.user
+                      ? `/lists/${this.props.auth.user.id}`
+                      : `/register`
+                  }
+                >
+                  TRY IT OUT
+                </Link>
               </Button>
             </Col>
           </Row>
@@ -123,12 +124,14 @@ const mapStateToProps = (state) => {
       item: state.item, //item is the name of our reducer
       isAuthenticated: state.auth.isAuthenticated,
       userId: state.auth.user._id,
+      auth: state.auth,
     };
   } else {
     return {
       list: state.list,
       item: state.item, //item is the name of our reducer
       isAuthenticated: state.auth.isAuthenticated,
+      auth: state.auth,
     };
   }
 };

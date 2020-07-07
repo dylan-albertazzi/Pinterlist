@@ -93,7 +93,7 @@ class AddPinModal extends Component {
                   type="url"
                   name="pinURL"
                   id="pinURL"
-                  placeholder="Add item"
+                  placeholder="Add Pinterest URL here"
                   onChange={this.onChange}
                 ></Input>
                 <small id="errorMsg" className="alert-danger ml-1 invisible">

@@ -4,8 +4,7 @@ import {
   GET_ITEMS,
   ADD_ITEM,
   DELETE_ITEM,
-  ITEMS_LOADING,
-  ADD_LIST,
+  ITEMS_LOADING
 } from "../actions/types";
 
 const initialState = {
