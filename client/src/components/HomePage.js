@@ -88,8 +88,17 @@ class HomePage extends Component {
         <Container>
           <Row className="my-3">
             <Col className="d-flex justify-content-center pt-4">
-              <Button className="shadow-sm main-buttons start-btn btn-block mt-auto d-flex align-items-center py-3 justify-content-center">
-                TRY IT OUT
+              <Button className="shadow-sm main-buttons start-btn btn-block my-auto d-flex align-items-center py-3 justify-content-center">
+                <Link
+                  className="text-light"
+                  to={
+                    this.props.auth.user
+                      ? `/lists/${this.props.auth.user.id}`
+                      : `/register`
+                  }
+                >
+                  TRY IT OUT
+                </Link>
               </Button>
             </Col>
           </Row>
