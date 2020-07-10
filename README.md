@@ -20,6 +20,8 @@ npm run dev
 
 Pinterlist will then be live on localhost 3000
 
+**Note:** You will have to set up your own Mongo DB and JWT tokens to develop this on your own.
+
 ## Contributing
 
 Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
