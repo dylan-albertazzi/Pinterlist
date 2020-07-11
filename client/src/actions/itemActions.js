@@ -50,6 +50,7 @@ export const addPin = (userid, listid, pinURL) => (dispatch, getState) => {
     )
     .then((res) => {
       console.log("== made it to response:", res);
+
       if (res.data.items.length < 1) {
         dispatch(
           returnErrors("Whoops, we can't find any ingrdients on this page", 204)

@@ -221,7 +221,9 @@ router.post("/:userid/:listid/addPin", auth, (req, res) => {
     var payload = JSON.parse(data.toString()); //turns recipe data into a json obj
     console.log("==Payload: ", payload);
 
-    if (payload.items) {
+    if (payload.error) {
+      res.status(500).json(payload);
+    } else if (payload.items) {
       res.status(202).json(payload);
     } else {
       res.status(404).json({
