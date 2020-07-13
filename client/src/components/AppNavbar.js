@@ -49,18 +49,18 @@ class AppNavbar extends Component {
         >
           <NavItem>Grocery Lists</NavItem>
         </Link>
-        <Link className="navbar-text-color mr-3" to="/about">
+        {/* <Link className="navbar-text-color mr-3" to="/about">
           <NavItem>About</NavItem>
-        </Link>
+        </Link> */}
         <Logout />
       </Fragment>
     );
 
     const guestLinks = (
       <Fragment>
-        <Link className="navbar-text-color mr-3" to="/about">
+        {/* <Link className="navbar-text-color mr-3" to="/about">
           <NavItem>About</NavItem>
-        </Link>
+        </Link> */}
 
         <RegisterModal />
 
