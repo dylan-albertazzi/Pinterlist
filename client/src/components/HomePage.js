@@ -41,18 +41,18 @@ class HomePage extends Component {
               />
             </Col>
             <Col className="d-flex justify-content-center">
-              <Button className="shadow-sm main-buttons start-btn btn-block my-auto d-flex align-items-center py-3 justify-content-center">
-                <Link
-                  className="text-light"
-                  to={
-                    this.props.auth.user
-                      ? `/lists/${this.props.auth.user.id}`
-                      : `/register`
-                  }
-                >
+              <Link
+                className="text-light main-buttons start-btn btn-block my-auto d-flex align-items-center py-3 justify-content-center"
+                to={
+                  this.props.auth.user
+                    ? `/lists/${this.props.auth.user.id}`
+                    : `/register`
+                }
+              >
+                <Button className="shadow-sm main-buttons start-btn btn-block my-auto d-flex align-items-center py-3 justify-content-center text-light">
                   START HERE
-                </Link>
-              </Button>
+                </Button>
+              </Link>
             </Col>
           </Row>
         </Container>
@@ -88,18 +88,18 @@ class HomePage extends Component {
         <Container>
           <Row className="my-3">
             <Col className="d-flex justify-content-center pt-4">
-              <Button className="shadow-sm main-buttons start-btn btn-block my-auto d-flex align-items-center py-3 justify-content-center">
-                <Link
-                  className="text-light"
-                  to={
-                    this.props.auth.user
-                      ? `/lists/${this.props.auth.user.id}`
-                      : `/register`
-                  }
-                >
+              <Link
+                className="main-buttons start-btn btn-block my-auto d-flex align-items-center py-3 justify-content-center"
+                to={
+                  this.props.auth.user
+                    ? `/lists/${this.props.auth.user.id}`
+                    : `/register`
+                }
+              >
+                <Button className="shadow-sm main-buttons start-btn btn-block my-auto d-flex align-items-center py-3 justify-content-center">
                   TRY IT OUT
-                </Link>
-              </Button>
+                </Button>
+              </Link>
             </Col>
           </Row>
           <Row className="my-5">
