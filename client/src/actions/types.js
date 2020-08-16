@@ -1,6 +1,7 @@
 //anything you do in your application you will have an action type for
 export const GET_ITEMS = "GET_ITEMS";
 export const ADD_ITEM = "ADD_ITEM";
+export const ADD_ITEM_NO_USER = "ADD_ITEM_NO_USER";
 export const DELETE_ITEM = "DELETE_ITEM";
 export const GET_LISTS = "GET_LISTS";
 export const ADD_LIST = "ADD_LIST";

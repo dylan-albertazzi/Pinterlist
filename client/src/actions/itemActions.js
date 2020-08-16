@@ -1,5 +1,11 @@
 import axios from "axios";
-import { GET_ITEMS, ADD_ITEM, DELETE_ITEM, ITEMS_LOADING } from "./types";
+import {
+  GET_ITEMS,
+  ADD_ITEM,
+  ADD_ITEM_NO_USER,
+  DELETE_ITEM,
+  ITEMS_LOADING,
+} from "./types";
 import { tokenConfig } from "./authActions";
 import { returnErrors } from "./errorActions";
 
@@ -91,6 +97,31 @@ export const addPin = (userid, listid, pinURL) => (dispatch, getState) => {
   //   .catch((err) =>
   //     dispatch(returnErrors(err.response.data, err.response.status))
   //   );
+};
+
+export const addPinNoUser = (pinURL) => (dispatch, getState) => {
+  //post to pin s
+  console.log("==in add pin no user post:", pinURL);
+  console.log("==url type", typeof pinURL);
+  axios
+    .post(`/api/lists/addPin`, { pinURL: pinURL })
+    .then((res) => {
+      console.log("== made it to response:", res);
+
+      if (res.data.items.length < 1) {
+        dispatch(
+          returnErrors("Whoops, we can't find any ingrdients on this page", 204)
+        );
+      } else {
+        dispatch({
+          type: ADD_ITEM_NO_USER,
+          payload: res.data,
+        });
+      }
+    })
+    .catch((err) =>
+      dispatch(returnErrors(err.response.data, err.response.status))
+    );
 };
 
 export const deleteItem = (userid, listid, itemid) => (dispatch, getState) => {

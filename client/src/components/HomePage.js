@@ -4,6 +4,7 @@ import { connect } from "react-redux";
 
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
+import AddPinNoUser from "./AddPinNoUser";
 
 class HomePage extends Component {
   static propTypes = {
@@ -72,6 +73,11 @@ class HomePage extends Component {
           </Row>
         </Container>
         <Container>
+          <Row>
+            <Col>
+              <AddPinNoUser />
+            </Col>
+          </Row>
           <Row className="mt-5">
             <Col className="text-left my-5">
               <h5>How it works</h5>

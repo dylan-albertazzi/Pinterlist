@@ -4,7 +4,8 @@ import {
   GET_ITEMS,
   ADD_ITEM,
   DELETE_ITEM,
-  ITEMS_LOADING
+  ITEMS_LOADING,
+  ADD_ITEM_NO_USER,
 } from "../actions/types";
 
 const initialState = {
@@ -33,6 +34,11 @@ export default function (state = initialState, action) {
         items: state.items.filter((item) => item.id !== action.payload),
       };
     case ADD_ITEM:
+      return {
+        ...state,
+        items: [...state.items, action.payload],
+      };
+    case ADD_ITEM_NO_USER:
       return {
         ...state,
         items: [...state.items, action.payload],

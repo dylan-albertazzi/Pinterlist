@@ -234,4 +234,38 @@ router.post("/:userid/:listid/addPin", auth, (req, res) => {
   });
 });
 
+// @route POST api/lists/addPin
+// @desc add pin with no user
+// @access Private
+router.post("/addPin", (req, res) => {
+  console.log("== In add ingredient cool path: ", req.body.pinURL);
+
+  var spawn = require("child_process").spawn;
+
+  //if cleaned send to URL, if not don't respond
+  var process = spawn("python3", [
+    "pinScraping/scraping_main.py",
+    req.body.pinURL,
+  ]);
+  console.log("== child process starting");
+  // Takes recipe data from the python script and loads it into a json object called 'payload'
+
+  process.stdout.on("data", function (data) {
+    console.log("Pipe data from python script ...");
+    var payload = JSON.parse(data.toString()); //turns recipe data into a json obj
+    console.log("==Payload: ", payload);
+
+    if (payload.error) {
+      res.status(500).json(payload);
+    } else if (payload.items) {
+      res.status(202).json(payload);
+    } else {
+      res.status(404).json({
+        success: false,
+        fail_on: "Could not get items from provided URL",
+      });
+    }
+  });
+});
+
 module.exports = router;
