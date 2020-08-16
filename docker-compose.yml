@@ -1,0 +1,29 @@
+version: "3"
+services:
+  client:
+    image: pinterlist_client
+    restart: always
+    ports:
+      - "3000:3000"
+
+    stdin_open: true
+    # volumes:
+    #   - ./client:/client
+    #   - /client/node_modules
+    links:
+      - server
+    networks:
+      - webappnetwork
+  server:
+    image: pinterlist_server
+    restart: always
+    ports:
+      - "5000:5000"
+    # volumes:
+    #   - ./MernShopping:/MernShopping
+    #   - /MernShopping/node_modules
+    networks:
+      - webappnetwork
+networks:
+  webappnetwork:
+    driver: bridge
